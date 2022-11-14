@@ -8,19 +8,18 @@ import Illust1 from "../assets/images/illust-1.png";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import AuthLayout from "../components/Layouts/AuthLayout";
 
 const Login = () => {
-
-
-// login schema
+  // login schema
   const LoginValidationSchema = Yup.object().shape({
     email: Yup.string()
-        .email("Format email salah")    
-        .required("Email tidak boleh kosong"),
+      .email("Format email salah")
+      .required("Email tidak boleh kosong"),
     password: Yup.string()
-        .min(8, "Kata sandi minimal 8 karakter")
-        .required("Kata sandi tidak boleh kosong"),
-  })
+      .min(8, "Kata sandi minimal 8 karakter")
+      .required("Kata sandi tidak boleh kosong"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -30,20 +29,20 @@ const Login = () => {
     validationSchema: LoginValidationSchema,
     onSubmit: async (values) => {
       console.log(values);
-      try{
-        const response = await axios.post("http://localhost:4000/user/login", values);
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/user/login",
+          values
+        );
         console.log(response);
-      }catch(err){
+      } catch (err) {
         console.log(err);
       }
     },
   });
 
-
-
   return (
-    <div className="container h-screen flex justify-center mt-10 md:auto mx-auto">
-      {/* wrapper left */}
+    <AuthLayout>
       <div className=" flex justify-center items-center flex-col gap-2 md:w-9/12 w-full ">
         {/* Login form */}
         <div className=" md:w-8/12 w-full">
@@ -80,9 +79,9 @@ const Login = () => {
                   required
                 />
                 {formik.errors.email && formik.touched.email && (
-                    <div className="text-red-500 text-sm">
-                        {formik.errors.email}
-                    </div>
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.email}
+                  </div>
                 )}
                 <input
                   type="password"
@@ -95,9 +94,9 @@ const Login = () => {
                   required
                 />
                 {formik.errors.password && formik.touched.password && (
-                    <div className="text-red-500 text-sm">
-                        {formik.errors.password}
-                    </div>
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.password}
+                  </div>
                 )}
                 <div className="flex flex-col">
                   <button
@@ -154,24 +153,7 @@ const Login = () => {
           <Footer />
         </div>
       </div>
-
-      {/* wrapper right */}
-      <div className="md:flex justify-center items-center flex-col  gap-2 w-6/12 border bg-gradient-to-r from-cyan-500 to-cyan-600 m-5 rounded-lg relative hidden">
-        {/* decoration image */}
-        <div className="decoration-image w-80 absolute left-0 bottom-0">
-          <img src={DecorationImage} alt="" />
-        </div>
-        <div className=" w-10/12 h-5/6 bg-gray-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 border border-gray-50 absolute py-8 px-10">
-          <div className="flex flex-col  h-full items-center justify-between">
-            <h2 className="text-4xl text-white font-bold tracking-wide">
-              We Don't Study. We Make Study Better.
-            </h2>
-
-            <img src={Illust1} alt="" className=" mb-10" />
-          </div>
-        </div>
-      </div>
-    </div>
+    </AuthLayout>
   );
 };
 
