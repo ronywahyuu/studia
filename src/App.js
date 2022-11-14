@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 // helmet provider
 import { HelmetProvider } from 'react-helmet-async';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 
@@ -22,6 +23,10 @@ function App() {
     {
       path: '/register',
       element: <Register />
+    },
+    {
+      path: '/dashboard',
+      element: <Dashboard />
     }
   ])
   return (

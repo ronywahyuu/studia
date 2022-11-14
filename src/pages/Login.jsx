@@ -3,14 +3,28 @@ import Logo from "../assets/images/logo.png";
 import FbIcon from "../assets/images/fb-icon.png";
 import GoogleIcon from "../assets/images/google-icon.png";
 import Footer from "../components/Footer";
-import DecorationImage from "../assets/images/decoration.png";
-import Illust1 from "../assets/images/illust-1.png";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import AuthLayout from "../components/Layouts/AuthLayout";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigate = useNavigate()
+
+  const users = [
+    {
+      email: "studia@mail.com",
+      password : "12345678"
+    },
+    {
+      email: "rony@mail.com",
+      password : "12345678"
+    },
+  ]
+
+
   // login schema
   const LoginValidationSchema = Yup.object().shape({
     email: Yup.string()
@@ -29,15 +43,30 @@ const Login = () => {
     validationSchema: LoginValidationSchema,
     onSubmit: async (values) => {
       console.log(values);
-      try {
-        const response = await axios.post(
-          "http://localhost:4000/user/login",
-          values
-        );
-        console.log(response);
-      } catch (err) {
-        console.log(err);
+      
+      const user = users.find((user) => user.email === values.email)
+      if(user){
+        // check if password match
+        if(user.password === values.password){
+          // redirect to dashboard
+          navigate('/dashboard')
+        }else{
+          // show error
+          alert('Kata sandi salah')
+        }
       }
+      
+  
+
+      // try {
+      //   const response = await axios.post(
+      //     "http://localhost:4000/user/login",
+      //     values
+      //   );
+      //   console.log(response);
+      // } catch (err) {
+      //   console.log(err);
+      // }
     },
   });
 
