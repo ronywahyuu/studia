@@ -1,0 +1,26 @@
+[
+    {
+      "id": 1,
+      "title": "Math",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.",
+      "duration": 120
+    },
+    {
+      "id": 2,
+      "title": "English",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.",
+      "duration": 120
+    },
+    {
+      "id": 3,
+      "title": "Science",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.",
+      "duration": 120
+    },
+    {
+      "id": 4,
+      "title": "History",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.",
+      "duration": 120
+    }
+]

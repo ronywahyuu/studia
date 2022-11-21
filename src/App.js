@@ -1,23 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+// helmet provider
+import { HelmetProvider } from 'react-helmet-async';
+import Dashboard from './pages/Dashboard';
+import Classes from './pages/Classes';
+import HomeLayout from './components/Layouts/HomeLayout';
+import ClassDetail from './pages/ClassDetail';
 
 function App() {
+
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomeLayout />,
+      children: [
+        {
+          path: '/',
+          element: <Dashboard />
+        },
+        {
+          path: '/h',
+          element: <Dashboard />
+        },
+        {
+          path: '/h/dashboard',
+          element: <Dashboard />
+        },
+        {
+          path: '/h/classes',
+          element: <Classes />
+        },
+        {
+          path: '/h/classes/:id',
+          element: <ClassDetail />
+        }
+      ]
+    },
+    {
+      path: '/login',
+      element: <Login />
+    },
+    {
+      path: '/register',
+      element: <Register />
+    },
+    {
+      path: '*',
+      element: <div>Not Found</div>
+    },
+  ])
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='text-teal-500'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'>
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HelmetProvider>
+      <div className='app'>
+        <RouterProvider router={router} />
+      </div>
+    </HelmetProvider>
   );
 }
 
