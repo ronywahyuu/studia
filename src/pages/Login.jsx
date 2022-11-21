@@ -4,10 +4,10 @@ import FbIcon from "../assets/images/fb-icon.png";
 import GoogleIcon from "../assets/images/google-icon.png";
 import Footer from "../components/Footer";
 import { useFormik } from "formik";
-import axios from "axios";
+// import axios from "axios";
 import * as Yup from "yup";
 import AuthLayout from "../components/Layouts/AuthLayout";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -49,7 +49,7 @@ const Login = () => {
         // check if password match
         if(user.password === values.password){
           // redirect to dashboard
-          navigate('/dashboard')
+          navigate('/h/dashboard')
         }else{
           // show error
           alert('Kata sandi salah')
