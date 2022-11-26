@@ -10,6 +10,8 @@ import Dashboard from './pages/Dashboard';
 import Classes from './pages/Classes';
 import HomeLayout from './components/Layouts/HomeLayout';
 import ClassDetail from './pages/ClassDetail';
+import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
+import HomeWork from './pages/HomeWork';
 
 function App() {
 
@@ -36,7 +38,17 @@ function App() {
           element: <Classes />
         },
         {
-          path: '/h/classes/:id',
+          path: '/h/hw',
+          element: <HomeWork />
+        }
+      ]
+    },
+    {
+      path: '/classes/:id',
+      element: <ClassDetailLayout />,
+      children: [
+        {
+          path: '/classes/:id',
           element: <ClassDetail />
         }
       ]
