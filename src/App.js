@@ -38,21 +38,25 @@ function App() {
           element: <Classes />
         },
         {
+          path: '/h/classes/:id',
+          element: <ClassDetail />,
+        },
+        {
           path: '/h/hw',
           element: <HomeWork />
         }
       ]
     },
-    {
-      path: '/classes/:id',
-      element: <ClassDetailLayout />,
-      children: [
-        {
-          path: '/classes/:id',
-          element: <ClassDetail />
-        }
-      ]
-    },
+    // {
+    //   path: '/classes/:id',
+    //   element: <ClassDetailLayout />,
+    //   children: [
+    //     {
+    //       path: '/classes/:id',
+    //       element: <ClassDetail />
+    //     }
+    //   ]
+    // },
     {
       path: '/login',
       element: <Login />
