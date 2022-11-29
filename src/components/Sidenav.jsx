@@ -193,7 +193,7 @@ const Sidenav = () => {
 
       {/* logout */}
       <div className="absolute bottom-0  flex justify-center w-full">
-        <NavLink to="/login" className="flex py-2 px-4 text-gray-400 rounded-lg">
+        <NavLink to="/auth/login" className="flex py-2 px-4 text-gray-400 rounded-lg">
           <button className="flex items-center  hover:bg-primary hover:text-white">
             <svg
               width="24"

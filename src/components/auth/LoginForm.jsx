@@ -1,15 +1,14 @@
 import React from "react";
-import Logo from "../assets/images/logo.png";
-import FbIcon from "../assets/images/fb-icon.png";
-import GoogleIcon from "../assets/images/google-icon.png";
-import Footer from "../components/Footer";
+import Logo from "../../assets/images/logo.png";
+import FbIcon from "../../assets/images/fb-icon.png";
+import GoogleIcon from "../../assets/images/google-icon.png";
+import Footer from "../../components/Footer";
 import { useFormik } from "formik";
 // import axios from "axios";
 import * as Yup from "yup";
-import AuthLayout from "../components/Layouts/AuthLayout";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginForm = () => {
 
   const navigate = useNavigate()
 
@@ -82,7 +81,7 @@ const Login = () => {
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-gray-700 text-2xl font-bold">Masuk</h2>
               <a
-                href="/register"
+                href="/auth/roles"
                 className="text-blue-600 text-base font-normal"
               >
                 Daftar
@@ -184,4 +183,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;
