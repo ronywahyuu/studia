@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
-import Login from './pages/Login';
+import LoginForm from './components/auth/LoginForm';
 import Register from './pages/Register';
 // helmet provider
 import { HelmetProvider } from 'react-helmet-async';
@@ -10,9 +10,15 @@ import Dashboard from './pages/Dashboard';
 import Classes from './pages/Classes';
 import HomeLayout from './components/Layouts/HomeLayout';
 import ClassDetail from './pages/ClassDetail';
+
+import AuthLayout from './components/Layouts/AuthLayout';
+import UserChoice from './components/auth/UserChoice';
+import StudentRegForm from './components/auth/StudentRegForm';
+import TeacherRegForm from './components/auth/TeacherRegForm';
+
 // import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
 import HomeWork from './pages/HomeWork';
-import HomeWorkAssignment from './pages/HomeWorkAssignment';
+import HomeWorkAssignment from './pages/HomeWorkAssignment'
 
 function App() {
 
@@ -64,13 +70,35 @@ function App() {
     //   ]
     // },
     {
-      path: '/login',
-      element: <Login />
+      path: '/auth',
+      element: <AuthLayout />,
+      children: [
+        {
+          path: '/auth/login',
+          element: <LoginForm />
+        },
+        {
+          path: '/auth/roles',
+          element: <UserChoice />
+        },
+        {
+          path: '/auth/register-student',
+          element: <StudentRegForm />
+        },
+        {
+          path: '/auth/register-teacher',
+          element: <TeacherRegForm />
+        }
+      ]
     },
-    {
-      path: '/register',
-      element: <Register />
-    },
+    // {
+    //   path: '/login',
+    //   element: <Login />
+    // },
+    // {
+    //   path: '/register',
+    //   element: <Register />
+    // },
     {
       path: '*',
       element: <div>Not Found</div>

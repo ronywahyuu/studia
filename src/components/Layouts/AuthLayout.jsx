@@ -3,8 +3,9 @@ import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import DecorationImage from "../../assets/images/decoration.png";
 import Illust1 from "../../assets/images/illust-1.png";
+import { Outlet } from "react-router-dom";
 
-const AuthLayout = ({ children }) => {
+const AuthLayout = () => {
 
     const location = useLocation()
 
@@ -24,7 +25,7 @@ const AuthLayout = ({ children }) => {
     </Helmet>
       <div className="container h-screen flex justify-center mt-10 md:auto mx-auto">
         {/* Wrapper left children  */}
-        {children}
+        <Outlet/>
 
         {/* wrapper right */}
         <div className="md:flex justify-center items-center flex-col  gap-2 w-6/12 border bg-gradient-to-r from-cyan-500 to-cyan-600 m-5 rounded-lg relative hidden">
