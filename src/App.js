@@ -10,8 +10,9 @@ import Dashboard from './pages/Dashboard';
 import Classes from './pages/Classes';
 import HomeLayout from './components/Layouts/HomeLayout';
 import ClassDetail from './pages/ClassDetail';
-import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
+// import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
 import HomeWork from './pages/HomeWork';
+import HomeWorkAssignment from './pages/HomeWorkAssignment';
 
 function App() {
 
@@ -44,6 +45,11 @@ function App() {
         {
           path: '/h/hw',
           element: <HomeWork />
+        }
+        ,
+        {
+          path: '/h/hw/:id',
+          element: <HomeWorkAssignment />
         }
       ]
     },

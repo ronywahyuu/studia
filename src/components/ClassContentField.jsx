@@ -87,8 +87,8 @@ const ClassContentField = () => {
       </div>
 
       {/* feedback button */}
-      <button className="border mt-10 bg-sky-800 p-2 rounded-lg">
-        <div className="flex items-center  justify-center gap-5">
+      <button className="border mt-10 bg-sky-800 p-2 rounded-lg hover:bg-sky-900 transition-all duration-300 w-3/12">
+        <div className="flex items-center   gap-5">
           <div>
             <svg
               width="16"
