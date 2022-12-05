@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Thumbnail from "../assets/images/thumbnail.png";
 
-const ArticleCard = () => {
+const Articlecard = () => {
   return (
     <>
       {/* article card */}
@@ -36,4 +36,4 @@ const ArticleCard = () => {
   );
 };
 
-export default ArticleCard;
+export default Articlecard;
