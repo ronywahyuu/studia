@@ -3,7 +3,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import LoginForm from './components/auth/LoginForm';
-import Register from './pages/Register';
+// import Register from './pages/Register';
 // helmet provider
 import { HelmetProvider } from 'react-helmet-async';
 import Dashboard from './pages/Dashboard';

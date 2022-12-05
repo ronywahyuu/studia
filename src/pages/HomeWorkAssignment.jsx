@@ -1,12 +1,12 @@
 import React from "react";
-import ClassContentField from "../components/ClassContentField";
-import ClassContentImg from "../assets/images/featured-img.png";
+// import ClassContentField from "../components/ClassContentField";
+// import ClassContentImg from "../assets/images/featured-img.png";
 import BannerImg from "../assets/images/banner.png";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const HomeWorkAssignment = () => {
   return (
-    <div className="">
+    <div className="animate-fade-in-right">
       <div className="flex justify-between items-center mt-10 mb-5">
         <h1 className="text-xl text-slate-500 font-medium">My Homework</h1>
       </div>

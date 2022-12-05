@@ -23,7 +23,7 @@ const AuthLayout = () => {
     <Helmet>
         <title>Studia - {title()} </title>
     </Helmet>
-      <div className="container h-screen flex justify-center mt-10 md:auto mx-auto">
+      <div className="container h-screen flex justify-center mt-10 md:auto mx-auto animate-fade-in-down ">
         {/* Wrapper left children  */}
         <Outlet/>
 

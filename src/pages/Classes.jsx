@@ -9,7 +9,7 @@ const Classes = () => {
       </div>
 
       {/* class card list */}
-      <div className="grid grid-cols-2 gap-4 ">
+      <div className="grid grid-cols-2 gap-4 animate-fade-in-right">
         <ClassCard />
         <ClassCard />
         <ClassCard />

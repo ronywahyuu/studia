@@ -1,10 +1,19 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import BannerImg from "../assets/images/featured-img.png";
 import ClassCard from "../components/ClassCard";
 
 const Dashboard = () => {
+  let location = useLocation();
+  const navigate = useNavigate();  
+  useEffect(() => {
+    if (location.pathname === "/"){
+      navigate("/h/dashboard");
+    }
+  })
+
   return (
-    <div className="flex flex-col gap-5 mt-10   ">
+    <div className="flex flex-col gap-5 mt-10  animate-fade-in-down ">
       {/* featured banner */}
       <div className="flex flex-col gap-5 w-9/12">
         <img src={BannerImg} alt="" className="w-full" />
