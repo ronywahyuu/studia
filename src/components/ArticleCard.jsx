@@ -1,32 +1,39 @@
-import React from 'react'
-import ArticleImg from "../assets/images/banner.png";
+import React from "react";
+import { Link } from "react-router-dom";
+import Thumbnail from "../assets/images/thumbnail.png";
 
-const ArticleCard = () => {
+const Articlecard = () => {
   return (
-    <div className="flex items-center gap-5 mt-5">
-      <div className="">
-        <img src={ArticleImg} alt="" className="w-40 h-36 object-cover" />
-      </div>
+    <>
+      {/* article card */}
+      <Link to="/h/articles/1" className="">
+        <div className="flex flex-col lg:flex-row-reverse rounded-lg justify-between border-t-8 border-[#77BBE2] bg-white p-5 ">
+            {/* Thumbnail */}
+            <div className="flex thumbnail lg:w-2/5 sm:w-full ">
+                <img src={Thumbnail} className="ml-auto mr-auto h-fit mt-auto mb-auto" alt="" />
+            </div>
+            
+            <div className="flex flex-col justify-between gap-5 lg:w-3/5 sm:wfull">
+                {/* Title */}
+                <h3 className="text-2xl font-medium">Interaction</h3>
 
-      <div className="flex flex-col gap-2">
-        <div>
-        <h1 className="text-xl font-medium">Lorem ipsum dolor sit amet.</h1>
-        <p className="text-sm text-gray-400">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          quod.
-        </p>
+                {/* desc */}
+                <div className="flex flex-col gap-2 mt-2">
+                    <p className="text-gray-300">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+                    quod. Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui explicabo temporibus non odio, soluta expedita! Doloribus, ut odit.
+                    </p>
+                </div>
+                {/* Author and Time */}
+                <div className="flex flex-row gap-10 ">
+                    <p className="text-gray-400 text-xs">Author name</p>
+                    <p className="text-gray-400 text-xs">Time </p>
+                </div>
+            </div>
         </div>
-        {/* profile */}
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-slate-300"></div>
-          <div className="flex flex-col">
-            <p className="text-sm font-medium">John Doe</p>
-            <p className="text-sm text-gray-400">2 days ago</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+      </Link>
+    </>
+  );
+};
 
-export default ArticleCard
+export default Articlecard;
