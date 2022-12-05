@@ -15,6 +15,8 @@ import AuthLayout from './components/Layouts/AuthLayout';
 import UserChoice from './components/auth/UserChoice';
 import StudentRegForm from './components/auth/StudentRegForm';
 import TeacherRegForm from './components/auth/TeacherRegForm';
+import Articles from './pages/Articles';
+import ViewArticles from './pages/ViewArticles';
 
 // import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
 import HomeWork from './pages/HomeWork';
@@ -43,6 +45,14 @@ function App() {
         {
           path: '/h/classes',
           element: <Classes />
+        },
+        {
+          path: '/h/articles',
+          element: <Articles />
+        },
+        {
+          path: '/h/articles/:id',
+          element: <ViewArticles />
         },
         {
           path: '/h/classes/:id',
