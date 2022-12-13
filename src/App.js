@@ -88,15 +88,15 @@ function App() {
           element: <LoginForm />
         },
         {
-          path: '/auth/roles',
+          path: '/auth/register',
           element: <UserChoice />
         },
         {
-          path: '/auth/register-student',
+          path: '/auth/register/student',
           element: <StudentRegForm />
         },
         {
-          path: '/auth/register-teacher',
+          path: '/auth/register/teacher',
           element: <TeacherRegForm />
         }
       ]

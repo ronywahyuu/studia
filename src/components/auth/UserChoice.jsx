@@ -25,7 +25,7 @@ const UserChoice = () => {
                 <ul className="flex flex-col gap-7  my-5">
           <li className="">
             <Link
-              to="/auth/register-teacher"
+              to="/auth/register/teacher"
               className={
                 `flex items-center py-2 px-4 rounded-lg bg-gray-300 hover:bg-primary  hover:text-white`
               }
@@ -36,7 +36,7 @@ const UserChoice = () => {
 
           <li className="">
             <Link
-              to="/auth/register-student"
+              to="/auth/register/student"
               className={
                 `flex items-center py-2 px-4 rounded-lg bg-gray-300 hover:bg-primary  hover:text-white`
               }

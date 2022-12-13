@@ -3,8 +3,17 @@ import AuthLayout from '../components/Layouts/AuthLayout';
 import Logo from "../assets/images/logo.png";
 import Footer from "../components/Footer";
 import {Link} from "react-router-dom";
+import { useFormik } from 'formik';
 
 const Register = () => {
+  // register formik
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: '',
+  //     password: '',
+      
+  // })
+
   return (
     <AuthLayout>
     <div className=" flex justify-center items-center flex-col gap-2 md:w-9/12 w-full ">
