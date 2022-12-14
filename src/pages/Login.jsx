@@ -27,9 +27,8 @@ const Login = () => {
 
   // login schema
   const LoginValidationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Format email salah")
-      .required("Email tidak boleh kosong"),
+    username: Yup.string()
+      .required("username tidak boleh kosong"),
     password: Yup.string()
       .min(8, "Kata sandi minimal 8 karakter")
       .required("Kata sandi tidak boleh kosong"),
@@ -37,24 +36,24 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: LoginValidationSchema,
     onSubmit: async (values) => {
       console.log(values);
       
-      const user = users.find((user) => user.email === values.email)
-      if(user){
-        // check if password match
-        if(user.password === values.password){
-          // redirect to dashboard
-          navigate('/h/dashboard')
-        }else{
-          // show error
-          alert('Kata sandi salah')
-        }
-      }
+      // const user = users.find((user) => user.email === values.email)
+      // if(user){
+      //   // check if password match
+      //   if(user.password === values.password){
+      //     // redirect to dashboard
+      //     navigate('/h/dashboard')
+      //   }else{
+      //     // show error
+      //     alert('Kata sandi salah')
+      //   }
+      // }
       
   
 
@@ -97,18 +96,18 @@ const Login = () => {
                 className="flex flex-col gap-4"
               >
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="text"
+                  name="username"
+                  id="username"
                   className="border py-2 px-3 rounded-md "
-                  placeholder="Nomor Ponsel atau Email"
-                  value={formik.values.email}
+                  placeholder="Username"
+                  value={formik.values.username}
                   onChange={formik.handleChange}
                   required
                 />
-                {formik.errors.email && formik.touched.email && (
+                {formik.errors.username && formik.touched.username && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.email}
+                    {formik.errors.username}
                   </div>
                 )}
                 <input

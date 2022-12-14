@@ -13,14 +13,13 @@ import ClassDetail from './pages/ClassDetail';
 
 import AuthLayout from './components/Layouts/AuthLayout';
 import UserChoice from './components/auth/UserChoice';
-import StudentRegForm from './components/auth/StudentRegForm';
-import TeacherRegForm from './components/auth/TeacherRegForm';
 import Articles from './pages/Articles';
 import ViewArticles from './pages/ViewArticles';
 
 // import ClassDetailLayout from './components/Layouts/ClassDetailLayout';
 import HomeWork from './pages/HomeWork';
 import HomeWorkAssignment from './pages/HomeWorkAssignment'
+import RegisterForm from './components/auth/RegisterForm';
 
 function App() {
 
@@ -93,11 +92,11 @@ function App() {
         },
         {
           path: '/auth/register/student',
-          element: <StudentRegForm />
+          element: <RegisterForm />
         },
         {
           path: '/auth/register/teacher',
-          element: <TeacherRegForm />
+          element: <RegisterForm />
         }
       ]
     },

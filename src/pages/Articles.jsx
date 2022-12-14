@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom"
 import Articlecard from "../components/Articlecard"
-import RightSide from "../components/RightSide"
+// import RightSide from "../components/RightSide"
 
 const Articles = () => {
   

@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // import logo
 import Logo from "../assets/images/logo.png";
 
 const Sidenav = () => {
   // is nav active, console log to see the result
   const location = useLocation();
+  const navigate = useNavigate();
 
   // if nav active, change svg color to white
   const setActiveColor = (path) => {
@@ -15,6 +16,12 @@ const Sidenav = () => {
       return "fill-gray-300";
     }
   };
+
+  // logout
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth/login");
+  }
 
   return (
     <aside className=" h-screen  sticky top-0 bottom-0 bg-soft-gray">
@@ -134,8 +141,8 @@ const Sidenav = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M2.50024 5.12692V16.0916C3.3269 15.7208 4.50357 15.3341 5.83357 15.3341C7.15857 15.3341 8.33357 15.7174 9.1669 16.0925V5.12609C8.93376 4.99186 8.69371 4.87002 8.44774 4.76107C7.75857 4.45855 6.8369 4.16687 5.83357 4.16687C4.3869 4.16687 3.1169 4.77107 2.50024 5.12692ZM10.8336 5.12692V16.1325C11.6652 15.7799 12.8419 15.4174 14.1669 15.4174C15.4969 15.4174 16.6752 15.7824 17.5002 16.1325V5.12692C16.8836 4.77107 15.6136 4.16687 14.1669 4.16687C13.1636 4.16687 12.2402 4.45772 11.5527 4.7619C11.3068 4.87085 11.0667 4.9927 10.8336 5.12692ZM10.0002 3.68351C9.77524 3.55351 9.47774 3.396 9.12274 3.23849C8.30607 2.87514 7.14524 2.50012 5.83357 2.50012C3.91024 2.50012 2.3019 3.3085 1.60357 3.72018C1.36653 3.86199 1.17074 4.06338 1.03566 4.30432C0.900571 4.54526 0.830901 4.81737 0.83357 5.09358V16.6875C0.83357 17.2075 1.1419 17.6017 1.49607 17.8C1.84774 17.9959 2.32107 18.0484 2.7519 17.8217C3.43774 17.4617 4.5694 17.0008 5.83357 17.0008C7.42107 17.0008 8.79357 17.7284 9.32107 18.0526C9.52245 18.1757 9.75324 18.2425 9.98928 18.2459C10.2253 18.2493 10.4579 18.1891 10.6627 18.0717C11.1936 17.7675 12.5702 17.0842 14.1669 17.0842C15.4511 17.0842 16.5977 17.5259 17.2811 17.8651C18.0744 18.2567 19.1669 17.735 19.1669 16.7167V5.09358C19.1669 4.56439 18.9102 4.0227 18.3969 3.72018C17.6986 3.30933 16.0902 2.50012 14.1669 2.50012C12.8552 2.50012 11.6952 2.87597 10.8777 3.23849C10.5227 3.396 10.2252 3.55351 10.0002 3.68351Z"
                   fill="#6D7C90"
                 />
@@ -183,7 +190,7 @@ const Sidenav = () => {
       </div>
 
       {/* logout */}
-      <div className="absolute bottom-0  flex justify-center w-full">
+      <div onClick={logout} className="absolute bottom-0  flex justify-center w-full">
         <NavLink to="/auth/login" className="flex py-2 px-4 text-gray-400 rounded-lg">
           <button className="flex items-center  hover:bg-primary hover:text-white">
             <svg

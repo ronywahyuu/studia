@@ -4,13 +4,6 @@ import BannerImg from "../assets/images/featured-img.png";
 import ClassCard from "../components/ClassCard";
 
 const Dashboard = () => {
-  let location = useLocation();
-  const navigate = useNavigate();  
-  useEffect(() => {
-    if (location.pathname === "/"){
-      navigate("/h/dashboard");
-    }
-  })
 
   return (
     <div className="flex flex-col gap-5 mt-10  animate-fade-in-down ">

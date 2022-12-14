@@ -10,11 +10,14 @@ const AuthLayout = () => {
     const location = useLocation()
 
     const title = () =>{
-        if(location.pathname === '/login'){
+        if(location.pathname === '/auth/login'){
             return 'Login'
-        }else if(location.pathname === '/register'){
-            return 'Daftar'
-        }else{
+        }else if(location.pathname === '/auth/register/teacher'){
+            return 'Register Guru'
+        }else if(location.pathname === '/auth/register/student'){
+            return 'Register Murid'
+        }
+        else{
             return 'Studia'
         }
     }
@@ -25,7 +28,7 @@ const AuthLayout = () => {
     </Helmet>
       <div className="container h-screen flex justify-center mt-10 md:auto mx-auto animate-fade-in-down ">
         {/* Wrapper left children  */}
-        <Outlet/>
+        <Outlet name="ronyyy"/>
 
         {/* wrapper right */}
         <div className="md:flex justify-center items-center flex-col  gap-2 w-6/12 border bg-gradient-to-r from-cyan-500 to-cyan-600 m-5 rounded-lg relative hidden">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/images/logo.png";
 import FbIcon from "../../assets/images/fb-icon.png";
 import GoogleIcon from "../../assets/images/google-icon.png";
@@ -7,69 +7,54 @@ import { useFormik } from "formik";
 // import axios from "axios";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ButtonSpin from "../loading/ButtonSpin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const LoginForm = () => {
+const LoginForm = ({name}) => {
+  console.log(name)
+  const [fetching, setFetching] = useState(false);
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const users = [
-    {
-      email: "studia@mail.com",
-      password : "12345678"
-    },
-    {
-      email: "rony@mail.com",
-      password : "12345678"
-    },
-  ]
+  const notifyError = () => toast.error("Username atau password salah");
 
 
   // login schema
   const LoginValidationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Format email salah")
-      .required("Email tidak boleh kosong"),
-    password: Yup.string()
-      .min(8, "Kata sandi minimal 8 karakter")
-      .required("Kata sandi tidak boleh kosong"),
+    username: Yup.string().required("username tidak boleh kosong"),
+    password: Yup.string().required("Kata sandi tidak boleh kosong"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validationSchema: LoginValidationSchema,
     onSubmit: async (values) => {
       console.log(values);
-      
-      const user = users.find((user) => user.email === values.email)
-      if(user){
-        // check if password match
-        if(user.password === values.password){
-          // redirect to dashboard
-          navigate('/h/dashboard')
-        }else{
-          // show error
-          alert('Kata sandi salah')
-        }
+      setFetching(true);
+      try {
+        await axios
+          .post("https://studia.deta.dev/users/login", values)
+          .then((res) => {
+            const token = res.data.access_token;
+            localStorage.setItem("token", token);
+            navigate("/h/dashboard");
+            setFetching(false);
+          });
+      } catch (err) {
+        console.log(err);
+        notifyError();
+        setFetching(false);
       }
-      
-  
-
-      // try {
-      //   const response = await axios.post(
-      //     "http://localhost:4000/user/login",
-      //     values
-      //   );
-      //   console.log(response);
-      // } catch (err) {
-      //   console.log(err);
-      // }
     },
   });
 
+  console.log(fetching);
   return (
+    <>
       <div className=" flex justify-center items-center flex-col gap-2 md:w-9/12 w-full ">
         {/* Login form */}
         <div className=" md:w-8/12 w-full">
@@ -81,7 +66,7 @@ const LoginForm = () => {
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-gray-700 text-2xl font-bold">Masuk</h2>
               <a
-                href="/auth/roles"
+                href="/auth/register"
                 className="text-blue-600 text-base font-normal"
               >
                 Daftar
@@ -96,18 +81,18 @@ const LoginForm = () => {
                 className="flex flex-col gap-4"
               >
                 <input
-                  type="email"
-                  name="email"
-                  id="email"
+                  type="username"
+                  name="username"
+                  id="username"
                   className="border py-2 px-3 rounded-md "
-                  placeholder="Nomor Ponsel atau Email"
-                  value={formik.values.email}
+                  placeholder="Nomor Ponsel atau username"
+                  value={formik.values.username}
                   onChange={formik.handleChange}
                   required
                 />
-                {formik.errors.email && formik.touched.email && (
+                {formik.errors.username && formik.touched.username && (
                   <div className="text-red-500 text-sm">
-                    {formik.errors.email}
+                    {formik.errors.username}
                   </div>
                 )}
                 <input
@@ -126,12 +111,16 @@ const LoginForm = () => {
                   </div>
                 )}
                 <div className="flex flex-col">
-                  <button
-                    type="submit"
-                    className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
-                  >
-                    Masuk
-                  </button>
+                  {fetching ? (
+                    <ButtonSpin />
+                  ) : (
+                    <button
+                      type="submit"
+                      className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
+                    >
+                      Masuk
+                    </button>
+                  )}
                 </div>
               </form>
             </div>
@@ -180,6 +169,8 @@ const LoginForm = () => {
           <Footer />
         </div>
       </div>
+      <ToastContainer position="bottom-right" theme="light"/>
+    </>
   );
 };
 
