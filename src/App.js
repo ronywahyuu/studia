@@ -20,6 +20,8 @@ import ViewArticles from './pages/ViewArticles';
 import HomeWork from './pages/HomeWork';
 import HomeWorkAssignment from './pages/HomeWorkAssignment'
 import RegisterForm from './components/auth/RegisterForm';
+import Lessons from './pages/Lessons';
+import CreateArticle from './pages/CreateArticle';
 
 function App() {
 
@@ -50,6 +52,10 @@ function App() {
           element: <Articles />
         },
         {
+          path: '/h/articles/create',
+          element: <CreateArticle />
+        },
+        {
           path: '/h/articles/:id',
           element: <ViewArticles />
         },
@@ -65,6 +71,11 @@ function App() {
         {
           path: '/h/hw/:id',
           element: <HomeWorkAssignment />
+        }
+        ,
+        {
+          path: '/h/ls',
+          element: <Lessons />
         }
       ]
     },
