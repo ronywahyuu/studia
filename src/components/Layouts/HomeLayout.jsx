@@ -64,12 +64,14 @@ const HomeLayout = () => {
       </Helmet>
       <div className="flex">
         <Sidenav />
-        <div className="flex">
-          <div className="py-10 pl-10 pr-10 bg-soft-gray w-8/12">
+        <div className="grid grid-cols-3 border">
+          <div className="py-10 pl-10 pr-10 bg-soft-gray  col-span-2  ">
             <Welcome name={user.name} />
             <Outlet />
           </div>
-          <RightSide />
+          <div className="">
+            <RightSide />
+          </div>
         </div>
       </div>
     </>

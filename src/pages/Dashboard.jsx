@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import BannerImg from "../assets/images/featured-img.png";
-import ClassCard from "../components/ClassCard";
+import ClassCard from "../components/cards/ClassCard";
 
 const Dashboard = () => {
 
@@ -14,7 +13,7 @@ const Dashboard = () => {
 
       {/* classes card*/}
       <div className="flex flex-col gap-5">
-        <div className="flex border justify-between items-center">
+      <div className="flex border justify-between items-center">
           <h1 className="text-2xl font-medium">My Classes</h1>
           <Link to="/h/classes">
             <p className="text-blue-400">See all</p>

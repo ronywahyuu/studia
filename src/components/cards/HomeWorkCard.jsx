@@ -6,7 +6,7 @@ const HomeWorkCard = () => {
     <>
       {/* class card */}
       <Link to="/h/hw/1" className="">
-        <div className="flex flex-col gap-5 rounded-lg justify-between border-t-8 border-blue-900 bg-white p-5 w-[850px]">
+        <div className="flex flex-col gap-5 rounded-lg justify-between border-t-8 border-blue-900 bg-white p-5 ">
           <div className="flex items-center justify-between gap-5">
             <h3 className="text-2xl font-medium">Interaction</h3>
             <p className="text-gray-300">12:00 - 13:00</p>

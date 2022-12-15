@@ -7,6 +7,9 @@ module.exports = {
         'primary' : '#77BBE2',
         'soft-gray' : '#FAFAFA'
       },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'],
+      },
       keyframes: {
         'fade-in-down': {
           '0%': {

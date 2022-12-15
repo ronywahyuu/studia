@@ -1,5 +1,5 @@
 import React from "react";
-import LessonCard from "../components/LessonCard";
+import LessonCard from "../components/cards/LessonCard";
 
 const Lessons = () => {
   return (
@@ -75,9 +75,8 @@ const Lessons = () => {
 
             {/*Lessons card list*/}
             <div className="grid grid-cols-1 gap-5 ">
-                <LessonCard />
-                <LessonCard />
-                <LessonCard />
+              <LessonCard/>
+              <LessonCard/>
             </div>
 
           </div>
