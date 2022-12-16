@@ -5,6 +5,8 @@ import Articlecard from "../components/cards/Articlecard";
 // import RightSide from "../components/RightSide"
 
 const Articles = () => {
+
+
   return (
     <div className=" flex flex-col w-full animate-fade-in-right ">
       {/* main side */}
@@ -17,14 +19,15 @@ const Articles = () => {
             </Link>
           </div>
           {/* featured Article */}
-          <div className="flex flex-col gap-5 w-full">
+          {/* <div className="flex flex-col gap-5 w-full">
             <Articlecard />
-          </div>
+          </div> */}
 
           {/* Articles card*/}
           <div className="flex flex-col gap-5">
             {/* Article card list*/}
             <div className="grid grid-cols-2 gap-5 ">
+
               <Articlecard />
               <Articlecard />
               <Articlecard />

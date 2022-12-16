@@ -3,7 +3,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import LoginForm from '../components/auth/LoginForm'
 import RegisterForm from '../components/auth/RegisterForm'
 import UserChoice from '../components/auth/UserChoice'
+import CreateHomeworkForm from '../components/homework/CreateHomeworkForm'
 import AuthLayout from '../components/Layouts/AuthLayout'
+import CreationLayout from '../components/Layouts/CreationLayout'
 import HomeLayout from '../components/Layouts/HomeLayout'
 import Articles from '../pages/Articles'
 import ClassDetail from '../pages/ClassDetail'
@@ -50,7 +52,7 @@ const router = createBrowserRouter([
           element: <ViewArticles />
         },
         {
-          path: '/h/classes/:id',
+          path: '/h/classes/lessons/:id',
           element: <ClassDetail />,
         },
         {
@@ -64,7 +66,7 @@ const router = createBrowserRouter([
         }
         ,
         {
-          path: '/h/ls',
+          path: '/h/classes/:id',
           element: <Lessons />
         },
         {
@@ -92,6 +94,16 @@ const router = createBrowserRouter([
         {
           path: '/auth/register/teacher',
           element: <RegisterForm />
+        }
+      ]
+    },
+    {
+      path: '/h/hw',
+      element: <CreationLayout />,
+      children: [
+        {
+          path: '/h/hw/create',
+          element: <CreateHomeworkForm />
         }
       ]
     },

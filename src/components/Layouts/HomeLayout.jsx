@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import RightSide from "../RightSide";
@@ -7,7 +7,6 @@ import Sidenav from "../Sidenav";
 import Welcome from "../Welcome";
 
 const HomeLayout = () => {
-  const [user, setUser] = useState({});
 
   const location = useLocation();
 
@@ -40,23 +39,22 @@ const HomeLayout = () => {
     }
   });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem("token");
-      const res = await axios.get("https://studia.deta.dev/users/current", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { data } = res.data;
-      setUser(data);
-      // const data = await res.json();
-      // console.log(data);
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const token = localStorage.getItem("token");
+  //     const res = await axios.get("https://studia.deta.dev/users/current", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const { data } = res.data;
+  //     setUser(data);
+  //     // const data = await res.json();
+  //     // console.log(data);
+  //   };
+  //   fetchUser();
+  // }, []);
 
-  console.log(user);
   return (
     <>
       <Helmet>
@@ -66,7 +64,7 @@ const HomeLayout = () => {
         <Sidenav />
         <div className="grid grid-cols-3 border">
           <div className="py-10 pl-10 pr-10 bg-soft-gray  col-span-2  ">
-            <Welcome name={user.name} />
+            <Welcome />
             <Outlet />
           </div>
           <div className="">

@@ -1,27 +1,78 @@
-import React from "react";
+import axios from "axios";
+import { Field, Form, Formik } from "formik";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ButtonSpin from "../components/loading/ButtonSpin";
+import { AuthContext } from "../context/authContext";
 
 const JoinClass = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const { user } = useContext(AuthContext);
+  const user_id = user?.id;
+  // console.log(user);
+  // console.log(`id : ${user_id}`);
+  const notifyNotFound = () => toast.error("Kelas tidak ditemukan");
+
   return (
     <div className="flex  justify-center items-center h-80">
-      <div className="flex flex-col  w-full px-32">
-        <h3 className="text-3xl mx-auto text-slate-500 font-medium mb-5 ">Kode Kelas</h3>
-        <form action="" className="flex flex-col">
-          <input
-            type="username"
-            name="username"
-            id="username"
-            className="border py-2 px-3 rounded-md w-full"
-            placeholder="Nomor Ponsel atau username"
-            required
-          />{" "}
-          <button
-            type="submit"
-            className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
-          >
-            Masuk
-          </button>
-        </form>
-      </div>
+      <Formik
+        initialValues={{
+          code: "",
+        }}
+        onSubmit={async (values) => {
+          console.log(values );
+          console.log(user_id);
+          setLoading(true);
+          try {
+            const res = await axios.post("/kelas/join", {
+              ...values,
+              user_id,
+            },{
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              }
+            });
+            console.log(res);
+            navigate("/h/classes");
+            setLoading(false);
+          } catch (err) {
+            notifyNotFound();
+            console.log(err);
+            setLoading(false);
+          }
+        }}
+      >
+        <div className="flex flex-col  w-full px-32">
+          <h3 className="text-2xl mx-auto text-slate-500 font-medium mb-5 ">
+            Masukan Kode Kelas
+          </h3>
+          <Form action="" className="flex flex-col">
+            <Field
+              type="text"
+              name="code"
+              id="code"
+              className="border py-2 px-3 rounded-md w-full"
+              placeholder="Kode Kelas"
+              required
+            />
+            {loading ? (
+              <ButtonSpin />
+            ) : (
+              <button
+                type="submit"
+                className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
+              >
+                Masuk
+              </button>
+            )}
+          </Form>
+        </div>
+      </Formik>
+      <ToastContainer />
     </div>
   );
 };

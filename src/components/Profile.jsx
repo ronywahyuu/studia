@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import IconBell from "../assets/images/svg/IconBell";
+import { AuthContext } from "../context/authContext";
 
 const Profile = () => {
+  const {user} = useContext(AuthContext)
+  const name = user?.name
+  const email = user?.email
   // dropdown
   const [isOpen, setIsOpen] = React.useState(false);
   const open = () => {
@@ -19,7 +23,8 @@ const Profile = () => {
         {/* profile avatar*/}
         <div className="w-10 cursor-pointer" onClick={open}>
           <img
-            src="https://placeimg.com/192/192/people"
+            // src="https://placeimg.com/192/192/people"
+            src={user?.image.url}
             alt="profile avatar"
             className="rounded-full"
           />
@@ -32,8 +37,8 @@ const Profile = () => {
         className={`${isOpen ? '' : 'hidden'} absolute right-9 mt-14 z-10 w-44  rounded divide-y divide-gray-600 shadow bg-gray-700 `}
       >
         <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-          <div>Bonnie Green</div>
-          <div className="font-medium truncate">name@flowbite.com</div>
+          <div>{name}</div>
+          <div className="font-medium truncate">{email}</div>
         </div>
         <ul
           className="py-1 text-sm text-gray-700 dark:text-gray-200"

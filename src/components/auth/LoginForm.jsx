@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../assets/images/logo.png";
 import FbIcon from "../../assets/images/fb-icon.png";
 import GoogleIcon from "../../assets/images/google-icon.png";
@@ -11,6 +11,7 @@ import axios from "axios";
 import ButtonSpin from "../loading/ButtonSpin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../context/authContext";
 
 const LoginForm = ({name}) => {
   console.log(name)
@@ -19,7 +20,8 @@ const LoginForm = ({name}) => {
 
   const notifyError = () => toast.error("Username atau password salah");
 
-
+  // context
+  // const { login } = useContext(AuthContext);
   // login schema
   const LoginValidationSchema = Yup.object().shape({
     username: Yup.string().required("username tidak boleh kosong"),
@@ -35,9 +37,10 @@ const LoginForm = ({name}) => {
     onSubmit: async (values) => {
       console.log(values);
       setFetching(true);
+      setFetching(true);
       try {
         await axios
-          .post("https://studia.deta.dev/users/login", values)
+          .post("/users/login", values)
           .then((res) => {
             const token = res.data.access_token;
             localStorage.setItem("token", token);

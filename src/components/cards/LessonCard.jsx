@@ -5,7 +5,7 @@ const LessonCard = () => {
   return (
     <>
       {/* class card */}
-      <Link to="/h/classes/1" className="">
+      <Link to="/h/classes/lessons/1" className="">
         <div className="flex flex-col gap-5 rounded-lg justify-between border-t-8 border-blue-900 bg-white p-3">
           <div className="flex ml-5 items-center justify-between gap-2">
             <h3 className="text-2xl font-medium mt-5">Interaction (Lessons 1)</h3>
