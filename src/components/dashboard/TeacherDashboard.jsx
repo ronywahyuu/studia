@@ -47,7 +47,7 @@ const TeacherDashboard = () => {
   return (
     <div className="grid grid-cols-2 gap-4 ">
       {loading ? (
-        <Skeleton width={500} height={500}   />
+        <Skeleton width={800} height={900}   />
       ) : (
         renderClassCard
       )}

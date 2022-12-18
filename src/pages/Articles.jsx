@@ -8,7 +8,7 @@ import Skeleton from "react-loading-skeleton";
 // import RightSide from "../components/RightSide"
 
 const Articles = () => {
-  const [articles, setArticles] = useState();
+  const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
@@ -28,12 +28,10 @@ const Articles = () => {
   };
 
   useEffect(() => {
-    let isMounted = true;
     fetchArticles();
-
     // clean up
     return () => {
-      isMounted = false;
+      setArticles([]);
     }
   }, [location.pathname]);
 
@@ -68,6 +66,7 @@ const Articles = () => {
           <div className="flex flex-col gap-5">
             {/* Article card list*/}
             <div className="grid grid-cols-2 gap-5 ">
+              {loading && <Skeleton height={900} width={800} />}
               {renderArticles}
             </div>
           </div>

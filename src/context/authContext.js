@@ -17,6 +17,7 @@ export const AuthContextProvider = ({ children }) => {
     // const role = isTeacher ? 'Teacher' : 'Student';
     const notifyError = () => toast.error("Username atau password salah");
 
+    const location = window.location;
 
     const login = async (values) => {
         console.log(values);
@@ -78,7 +79,7 @@ export const AuthContextProvider = ({ children }) => {
         if (localStorage.getItem("token")) {
             fetchUser();
         }
-    }, []);
+    }, [location.pathname]);
 
     return (
         <AuthContext.Provider

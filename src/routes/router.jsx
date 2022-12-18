@@ -62,6 +62,9 @@ const router = createBrowserRouter([
           path: '/h/hw',
           element: <HomeWork />
         },
+        // {
+        //   path: '/h/hw/:id',
+        // }
         {
           path: '/h/hw/:id',
           element: <HomeWorkAssignment />

@@ -5,11 +5,12 @@ import TimeAgo from "react-timeago";
 
 const Articlecard = ({ article, color }) => {
   // console.log(color())
-  console.log(new Date(article?.release_date));
+  // console.log(new Date(article?.release_date));
+  // console.log(article?.id)
   return (
     <>
       {/* article card */}
-      <Link to="/h/articles/1" className="">
+      <Link to={`/h/articles/${article?.id}`} className="">
         <div
           className={`flex flex-col lg:flex-row-reverse rounded-lg justify-between border-t-8 border-[#77BBE2]   bg-white p-5 `}
         >

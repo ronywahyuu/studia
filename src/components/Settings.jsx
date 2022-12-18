@@ -1,32 +1,44 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import ButtonSpin from "../components/loading/ButtonSpin";
 
 const Settings = () => {
   const { user } = useContext(AuthContext);
-  const [name, setName] = useState(user?.name );
+  const [name, setName] = useState(user?.name);
   const [address, setAddress] = useState(user?.address || "");
   const [gender, setGender] = useState(user?.gender || "");
-
+  const [loading, setLoading] = useState(false);
   // console.log(user?.id)
+  const navigate = useNavigate();
 
   const handleUpdate = async () => {
-    try{
-      const res = await axios.put(`/users/update/${user?.id}`, {
-        name,
-        address,
-        gender,
-      },{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    setLoading(true);
+    try {
+      const res = await axios.put(
+        `/users/update/${user?.id}`,
+        {
+          name,
+          address,
+          gender,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      })
-  
+      );
+
       console.log(res);
-    }catch(err){
-      console.log(err)
+      // navigate("/h/dashboard")
+      setLoading(false);
+      window.location.href = "/h/dashboard";
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex  flex-col  mt-10 mb-5">
@@ -34,7 +46,7 @@ const Settings = () => {
 
       <div className="flex flex-col rounded-lg justify-between border-t-8 border-[#77BBE2] bg-white p-5">
         {/* image profile */}
-        <div className="flex items-center space-x-6 pb-5">
+        {/* <div className="flex items-center space-x-6 pb-5">
           <div className="shrink-0">
             <img
               className="h-16 w-16 object-cover rounded-full"
@@ -57,6 +69,9 @@ const Settings = () => {
               />
             </label>
           </div>
+        </div> */}
+        <div>
+          <h1 className="text-xl text-slate-500 font-medium mb-5">Update your profile</h1>
         </div>
         <div className="flex flex-col justify-between gap-5 w-11/12">
           <input
@@ -83,17 +98,21 @@ const Settings = () => {
             id="gender"
             className="border py-2 px-3 rounded-md "
             placeholder="Gender"
-            value={gender}
+            value={gender === true ? "Male" : "Female"}
             onChange={(e) => setGender(e.target.value)}
           />
 
-          <button
-            type="button"
-            className="px-5 py-2 w-36 ml-auto text-white rounded-3xl mt-10 bg-[#77BBE2]"
-            onClick={handleUpdate}
-          >
-            Submit
-          </button>
+          {loading && <ButtonSpin />}
+          {!loading && (
+            <button
+              type="button"
+              className="flex justify-center items-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-[#77BBE2] "
+              // className="px-5 py-2 w-36 ml-auto text-white rounded-3xl mt-10 bg-[#77BBE2]"
+              onClick={handleUpdate}
+            >
+              Submit
+            </button>
+          )}
         </div>
       </div>
     </div>

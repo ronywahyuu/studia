@@ -76,12 +76,12 @@ const HomeWorkAssignment = () => {
           </div>
 
           {/* task submit form */}
-          <form class=" ">
+          <form className=" ">
             <div className="flex flex-col rounded-2xl bg-soft-gray p-5">
               <p className="text-base text-gray-500 font-medium">
                 Turn Your Work Here!{" "}
               </p>
-              <label class="block mt-3">
+              <label className="block mt-3">
                 <input
                   type="file"
                   className="block w-full text-sm text-slate-500

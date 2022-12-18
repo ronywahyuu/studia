@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import IconBell from "../assets/images/svg/IconBell";
 import { AuthContext } from "../context/authContext";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const {user} = useContext(AuthContext)
-  const name = user?.name
-  const email = user?.email
+  const { user } = useContext(AuthContext);
+  const name = user?.name;
+  const email = user?.email;
   // dropdown
   const [isOpen, setIsOpen] = React.useState(false);
   const open = () => {
@@ -17,7 +18,7 @@ const Profile = () => {
       <div className="flex items-center justify-end space-x-5 ">
         {/* notification */}
         <div className="w-10 rounded-lg p-3 flex justify-center bg-soft-gray">
-          <IconBell/>
+          <IconBell />
         </div>
 
         {/* profile avatar*/}
@@ -34,7 +35,9 @@ const Profile = () => {
       {/* dropdown */}
       <div
         id="userDropdown"
-        className={`${isOpen ? '' : 'hidden'} absolute right-9 mt-14 z-10 w-44  rounded divide-y divide-gray-600 shadow bg-gray-700 `}
+        className={`${
+          isOpen ? "" : "hidden"
+        } absolute right-9 mt-14 z-10 w-44  rounded divide-y divide-gray-600 shadow bg-gray-700 `}
       >
         <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
           <div>{name}</div>
@@ -44,22 +47,18 @@ const Profile = () => {
           className="py-1 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="avatarButton"
         >
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Settings
-            </a>
-          </li>
+          <Link
+            to="/h/dashboard"
+            className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/h/settings"
+            className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            Settings
+          </Link>
         </ul>
         <div className="py-1">
           <a

@@ -4,6 +4,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 // import logo and assets
 import Logo from "../assets/images/logo.png";
+import NewLogo from "../assets/images/new-logo.png";
 import IconArticles from "../assets/images/svg/IconArticles";
 import IconClasses from "../assets/images/svg/IconClasses";
 import IconDashboard from "../assets/images/svg/IconDashboard";
@@ -39,7 +40,7 @@ const Sidenav = () => {
       <div className=" py-5 px-10 relative ">
         {/* logo */}
         <div className="flex justify-center items-center">
-          <img src={Logo} alt="" className="w-28" />
+          <img src={NewLogo} alt="" className="w-28" />
         </div>
 
         <ul className="flex flex-col gap-7  my-5">

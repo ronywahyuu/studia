@@ -56,7 +56,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5">
-            <div className="flex border justify-between items-center">
+            <div className="flex  justify-between items-center">
               <h1 className="text-2xl font-medium">My Classes</h1>
               <Link to="/h/classes">
                 <p className="text-blue-400">See all</p>

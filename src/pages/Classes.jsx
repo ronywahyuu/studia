@@ -77,6 +77,7 @@ const Classes = () => {
 
         {/* class card list */}
         <div className="grid grid-cols-2 gap-4  ">
+          {loading && <Skeleton height={900} width={800} />}
           {classes.length === 0 && <h1>No Classes</h1>}
           {roles() === "Student" && renderStudentClassCard}
           {roles() === "Teacher" && renderTeacherClassCard}

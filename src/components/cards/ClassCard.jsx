@@ -61,7 +61,7 @@ const ClassCard = ({ data }) => {
             {/* class participant and interactions */}
             <div className="flex items-center justify-between gap-5">
               {/* avatar group */}
-              <div className="flex items-center -space-x-4">
+              {/* <div className="flex items-center -space-x-4">
                 <div className="w-10">
                   <img
                     className="rounded-full w-full"
@@ -76,14 +76,13 @@ const ClassCard = ({ data }) => {
                     alt="participant"
                   />
                 </div>
-                {/* counter */}
                 <div className="w-10">
                   <div className="flex items-center justify-center w-full h-full rounded-full p-2 bg-sky-600">
                     <p className="text-white">{data?.count}</p>
                   </div>
                 </div>
-              </div>
-
+              </div> */}
+              <p>Joined: {data?.count}</p>
               {/* interactions */}
               <div className="flex items-center gap-1">
                 <p>30</p>
