@@ -15,10 +15,13 @@ import { AuthContext } from "../../context/authContext";
 
 const LoginForm = ({name}) => {
   console.log(name)
-  const [fetching, setFetching] = useState(false);
+
+  const {setIsAuthenticated, login, fetching, notifyError} = useContext(AuthContext)
+
+  // const [fetching, setFetching] = useState(false);
   const navigate = useNavigate();
 
-  const notifyError = () => toast.error("Username atau password salah");
+  // const notifyError = () => toast.error("Username atau password salah");
 
   // context
   // const { login } = useContext(AuthContext);
@@ -28,6 +31,8 @@ const LoginForm = ({name}) => {
     password: Yup.string().required("Kata sandi tidak boleh kosong"),
   });
 
+  console.log(`isfetching: ${fetching}`)
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -35,27 +40,32 @@ const LoginForm = ({name}) => {
     },
     validationSchema: LoginValidationSchema,
     onSubmit: async (values) => {
-      console.log(values);
-      setFetching(true);
-      setFetching(true);
-      try {
-        await axios
-          .post("/users/login", values)
-          .then((res) => {
-            const token = res.data.access_token;
-            localStorage.setItem("token", token);
-            navigate("/h/dashboard");
-            setFetching(false);
-          });
-      } catch (err) {
-        console.log(err);
-        notifyError();
-        setFetching(false);
-      }
+      login(values)
+
+      // navigate("/h/dashboard");
+      // console.log(values);
+      // setFetching(true);
+      // setFetching(true);
+      // try {
+      //   await axios
+      //     .post("/users/login", values)
+      //     .then((res) => {
+      //       const token = res.data.access_token;
+      //       localStorage.setItem("token", token);
+      //       // navigate to 
+      //       navigate("/h/dashboard");
+      //       // window.location.reload();
+      //       setIsAuthenticated(true)
+      //       setFetching(false);
+      //     });
+      // } catch (err) {
+      //   console.log(err);
+      //   notifyError();
+      //   setFetching(false);
+      // }
     },
   });
 
-  console.log(fetching);
   return (
     <>
       <div className=" flex justify-center items-center flex-col gap-2 md:w-9/12 w-full ">

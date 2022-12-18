@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 
@@ -8,11 +8,15 @@ import IconArticles from "../assets/images/svg/IconArticles";
 import IconClasses from "../assets/images/svg/IconClasses";
 import IconDashboard from "../assets/images/svg/IconDashboard";
 import IconHomework from "../assets/images/svg/IconHomework";
+import { AuthContext } from "../context/authContext";
 
 const Sidenav = () => {
+
+  const {logout} = useContext(AuthContext)
+
   // is nav active, console log to see the result
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // if nav active, change svg color to white
   const setActiveColor = (path) => {
@@ -24,10 +28,10 @@ const Sidenav = () => {
   };
 
   // logout
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/auth/login");
-  };
+  // const logout = () => {
+  //   localStorage.removeItem("token");
+  //   navigate("/auth/login");
+  // };
 
   return (
     <aside className=" h-screen  sticky top-0 bottom-0 bg-soft-gray">

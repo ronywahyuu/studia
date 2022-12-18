@@ -16,6 +16,7 @@ const JoinClass = () => {
   // console.log(user);
   // console.log(`id : ${user_id}`);
   const notifyNotFound = () => toast.error("Kelas tidak ditemukan");
+  const notifySuccess = () => toast.success("Berhasil bergabung ke kelas");
 
   return (
     <div className="flex  justify-center items-center h-80">
@@ -37,6 +38,7 @@ const JoinClass = () => {
               }
             });
             console.log(res);
+            notifySuccess();
             navigate("/h/classes");
             setLoading(false);
           } catch (err) {
@@ -48,7 +50,7 @@ const JoinClass = () => {
       >
         <div className="flex flex-col  w-full px-32">
           <h3 className="text-2xl mx-auto text-slate-500 font-medium mb-5 ">
-            Masukan Kode Kelas
+            Enter Class Code
           </h3>
           <Form action="" className="flex flex-col">
             <Field
@@ -56,7 +58,7 @@ const JoinClass = () => {
               name="code"
               id="code"
               className="border py-2 px-3 rounded-md w-full"
-              placeholder="Kode Kelas"
+              placeholder="Code"
               required
             />
             {loading ? (
@@ -66,7 +68,7 @@ const JoinClass = () => {
                 type="submit"
                 className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
               >
-                Masuk
+                Join
               </button>
             )}
           </Form>

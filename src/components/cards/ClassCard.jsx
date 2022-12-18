@@ -4,10 +4,10 @@ import IconChat from "../../assets/images/svg/IconChat";
 import IconClock from "../../assets/images/svg/IconClock";
 import IconStickyNotes from "../../assets/images/svg/IconStickyNotes";
 
-const ClassCard = ({data}) => {
-
+const ClassCard = ({ data }) => {
   // console.log(data.image.url)
-  
+
+  console.log(data)
   return (
     <>
       {/* class card */}
@@ -15,7 +15,7 @@ const ClassCard = ({data}) => {
         <div className="flex flex-col rounded-lg justify-between border-t-8 border-blue-900 bg-white p-5 ">
           <div className="flex items-center justify-between gap-5">
             <h3 className="text-2xl font-medium">{data?.name}</h3>
-            <p className="text-gray-300">12:00 - 13:00</p>
+            {/* <p className="text-gray-300">12:00 - 13:00</p> */}
           </div>
 
           {/* desc */}
@@ -33,21 +33,24 @@ const ClassCard = ({data}) => {
                 className="w-10 h-10 rounded-full"
               />
               <div className="flex flex-col">
-                <h3 className="text-lg font-medium text-gray-400">{data?.owner ? data.owner?.name : 'none' }</h3>
+                <h3 className="text-lg font-medium text-gray-400">
+                  {data?.owner ? data.owner?.name : "none"}
+                </h3>
               </div>
             </div>
 
             {/* class info */}
             <div className="flex items-center justify-between ">
-              <div className="flex items-center gap-2">
-                <IconStickyNotes />
+              <div className="flex  flex-col ">
+                {/* <IconStickyNotes /> */}
+                <h4 className="text-base text-slate-500 font-bold">Class Code</h4>
                 <div className="class-card__title">
-                  <h3>B Classes</h3>
+                  <h3 className="text-slate-600 ">{data?.code}</h3>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
-                <IconClock/>
+                <IconClock />
 
                 <div className="class-card__title">
                   <h3>3 Hours</h3>
@@ -76,7 +79,7 @@ const ClassCard = ({data}) => {
                 {/* counter */}
                 <div className="w-10">
                   <div className="flex items-center justify-center w-full h-full rounded-full p-2 bg-sky-600">
-                    <p className="text-white">+20</p>
+                    <p className="text-white">{data?.count}</p>
                   </div>
                 </div>
               </div>
@@ -84,7 +87,7 @@ const ClassCard = ({data}) => {
               {/* interactions */}
               <div className="flex items-center gap-1">
                 <p>30</p>
-                <IconChat/>
+                <IconChat />
               </div>
             </div>
           </div>

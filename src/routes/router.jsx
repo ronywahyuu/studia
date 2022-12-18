@@ -5,7 +5,6 @@ import RegisterForm from '../components/auth/RegisterForm'
 import UserChoice from '../components/auth/UserChoice'
 import CreateHomeworkForm from '../components/homework/CreateHomeworkForm'
 import AuthLayout from '../components/Layouts/AuthLayout'
-import CreationLayout from '../components/Layouts/CreationLayout'
 import HomeLayout from '../components/Layouts/HomeLayout'
 import Articles from '../pages/Articles'
 import ClassDetail from '../pages/ClassDetail'
@@ -17,6 +16,9 @@ import HomeWorkAssignment from '../pages/HomeWorkAssignment'
 import JoinClass from '../pages/JoinClass'
 import Lessons from '../pages/Lessons'
 import ViewArticles from '../pages/ViewArticles'
+import CreateClass from '../components/dashboard/CreateClass'
+import Settings from '../components/Settings'
+import CreateLesson from '../components/classes/CreateLesson'
 
 const router = createBrowserRouter([
     {
@@ -40,9 +42,14 @@ const router = createBrowserRouter([
           element: <Classes />
         },
         {
+          path: '/h/classes/create',
+          element: <CreateClass />
+        },
+        {
           path: '/h/articles',
           element: <Articles />
         },
+        
         {
           path: '/h/articles/create',
           element: <CreateArticle />
@@ -52,26 +59,36 @@ const router = createBrowserRouter([
           element: <ViewArticles />
         },
         {
-          path: '/h/classes/lessons/:id',
-          element: <ClassDetail />,
-        },
-        {
           path: '/h/hw',
           element: <HomeWork />
-        }
-        ,
+        },
         {
           path: '/h/hw/:id',
           element: <HomeWorkAssignment />
-        }
-        ,
+        },
+        {
+          path: '/h/hw/create',
+          element: <CreateHomeworkForm />
+        },
         {
           path: '/h/classes/:id',
           element: <Lessons />
         },
         {
+          path: '/h/classes/:classId/lessons/:lessonId',
+          element: <ClassDetail />,
+        },
+        {
+          path: '/h/classes/:id/create',
+          element: <CreateLesson/>
+        },
+        {
           path: '/h/classes/join',
           element: <JoinClass/>
+        },
+        {
+          path: '/h/settings',
+          element: <Settings/>
         }
       ]
     },
@@ -94,16 +111,6 @@ const router = createBrowserRouter([
         {
           path: '/auth/register/teacher',
           element: <RegisterForm />
-        }
-      ]
-    },
-    {
-      path: '/h/hw',
-      element: <CreationLayout />,
-      children: [
-        {
-          path: '/h/hw/create',
-          element: <CreateHomeworkForm />
         }
       ]
     },

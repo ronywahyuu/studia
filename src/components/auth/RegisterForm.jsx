@@ -77,7 +77,11 @@ const RegisterForm = () => {
 
               if (location.pathname === "/auth/register/student") {
                 await axios
-                  .post("https://studia.deta.dev/users/register", values)
+                  .post("https://studia.deta.dev/users/register", {
+                    ...values,
+                    isTeacher: false,
+                    isStudent: true,
+                  })
                   .then((res) => {
                     console.log(res);
                     navigate("/auth/login");
