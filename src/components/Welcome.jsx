@@ -8,7 +8,7 @@ const Welcome = () => {
   const {user} = useContext(AuthContext)
   const name = user?.name
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5  lg:w-[900px] md:w-full">
       
       <h1 className="text-2xl font-medium ">Welcome {
         name ? name : <Skeleton width={200} />

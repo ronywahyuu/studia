@@ -58,7 +58,6 @@ export const AuthContextProvider = ({ children }) => {
             return 'Student'
         }
     }
-    console.log(`is authenticated: ${isAuthenticated}`)
     useEffect(() => {
         const fetchUser = async () => {
             const token = localStorage.getItem("token");

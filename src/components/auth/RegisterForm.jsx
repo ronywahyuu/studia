@@ -21,32 +21,35 @@ const RegisterForm = () => {
   // label condition
   useEffect(() => {
     if (location.pathname === "/auth/register/teacher") {
-      setLabel("Guru");
+      setLabel("Teacher");
     } else if (location.pathname === "/auth/register/student") {
-      setLabel("Murid");
+      setLabel("Student");
     } else {
-      setLabel("Guru");
+      setLabel("Teacher");
     }
   }, [location.pathname]);
 
   //   toast
-  const notifyError = () => toast.error("Gagal mendaftar");
+  const notifyError = () => toast.error("Account has been registered");
 
   // login schema
   const LoginValidationSchema = Yup.object().shape({
-    username: Yup.string().required("username tidak boleh kosong"),
-    password: Yup.string().required("Kata sandi tidak boleh kosong"),
-    email: Yup.string().required("Email tidak boleh kosong"),
-    name: Yup.string().required("Nama tidak boleh kosong"),
-    address: Yup.string().required("Alamat tidak boleh kosong"),
+    username: Yup.string().required("Username cannot empty"),
+    password: Yup.string().required("password cannot empty"),
+    email: Yup.string().required("Email cannot empty"),
+    name: Yup.string().required("Name cannot empty"),
+    address: Yup.string().required("Address cannot empty"),
+    gender: Yup.string().required("Please select your gender"),
     password_confirmation: Yup.string()
-      .required("Konfirmasi kata sandi tidak boleh kosong")
-      .oneOf([Yup.ref("password"), null], "Password tidak sama"),
+      .required("Password Confirmation cannot empty")
+      .oneOf([Yup.ref("password"), null], "Password not match"),
   });
 
   return (
     <div className=" flex justify-center items-center flex-col gap-2 md:w-9/12 w-full ">
       <Formik
+        validateOnChange={false}
+        validateOnBlur={false}
         initialValues={{
           name: "",
           email: "",
@@ -59,41 +62,41 @@ const RegisterForm = () => {
         validationSchema={LoginValidationSchema}
         onSubmit={async (values) => {
           console.log(values);
-            try {
-              console.log(values);
-              setFetching(true);
-              if (location.pathname === "/auth/register/teacher") {
-                await axios
-                  .post("https://studia.deta.dev/users/register", {
-                    ...values,
-                    isTeacher: true,
-                    isStudent: false,
-                  })
-                  .then((res) => {
-                    console.log(res);
-                    navigate("/auth/login");
-                    setFetching(false);
-                  });
-              }
-
-              if (location.pathname === "/auth/register/student") {
-                await axios
-                  .post("https://studia.deta.dev/users/register", {
-                    ...values,
-                    isTeacher: false,
-                    isStudent: true,
-                  })
-                  .then((res) => {
-                    console.log(res);
-                    navigate("/auth/login");
-                    setFetching(false);
-                  });
-              }
-            } catch (err) {
-              console.log(err);
-              notifyError();
-              setFetching(false);
+          try {
+            console.log(values);
+            setFetching(true);
+            if (location.pathname === "/auth/register/teacher") {
+              await axios
+                .post("https://studia.deta.dev/users/register", {
+                  ...values,
+                  isTeacher: true,
+                  isStudent: false,
+                })
+                .then((res) => {
+                  console.log(res);
+                  navigate("/auth/login");
+                  setFetching(false);
+                });
             }
+
+            if (location.pathname === "/auth/register/student") {
+              await axios
+                .post("https://studia.deta.dev/users/register", {
+                  ...values,
+                  isTeacher: false,
+                  isStudent: true,
+                })
+                .then((res) => {
+                  console.log(res);
+                  navigate("/auth/login");
+                  setFetching(false);
+                });
+            }
+          } catch (err) {
+            console.log(err);
+            notifyError();
+            setFetching(false);
+          }
         }}
       >
         {({ errors, touched }) => (
@@ -109,7 +112,7 @@ const RegisterForm = () => {
                   href="/auth/login"
                   className="text-blue-600 text-base font-normal"
                 >
-                  Masuk
+                  Sign In
                 </a>
               </div>
 
@@ -121,12 +124,11 @@ const RegisterForm = () => {
                     name="name"
                     id="name"
                     className="border py-2 px-3 rounded-md "
-                    placeholder="Nama Lengkap"
+                    placeholder="Full Name"
                     // value={values.name}
                     // onChange={values.handleChange}
-                    required
                   />
-                  {errors.name && touched.name ? (
+                  {errors.name ? (
                     <div className="text-red-500">{errors.name}</div>
                   ) : null}
                   <Field
@@ -137,9 +139,8 @@ const RegisterForm = () => {
                     placeholder="Email"
                     // value={values.email}
                     // onChange={values.handleChange}
-                    required
                   />
-                  {errors.email && touched.email ? (
+                  {errors.email ? (
                     <div className="text-red-500">{errors.email}</div>
                   ) : null}
                   <Field
@@ -147,12 +148,11 @@ const RegisterForm = () => {
                     name="address"
                     id="address"
                     className="border py-2 px-3 rounded-md "
-                    placeholder="Alamat"
+                    placeholder="Address"
                     // value={values.address}
                     // onChange={values.handleChange}
-                    required
                   />
-                  {errors.address && touched.address ? (
+                  {errors.address ? (
                     <div className="text-red-500">{errors.address}</div>
                   ) : null}
                   <Field
@@ -163,9 +163,8 @@ const RegisterForm = () => {
                     placeholder="Username"
                     // value={values.username}
                     // onChange={values.handleChange}
-                    required
                   />
-                  {errors.username && touched.username ? (
+                  {errors.username ? (
                     <div className="text-red-500">{errors.username}</div>
                   ) : null}
                   <Field
@@ -173,12 +172,11 @@ const RegisterForm = () => {
                     name="password"
                     id="password"
                     className="border py-2 px-3 rounded-md"
-                    placeholder="Kata Sandi"
+                    placeholder="Password"
                     // value={values.password}
                     // onChange={values.handleChange}
-                    required
                   />
-                  {errors.password && touched.password ? (
+                  {errors.password ? (
                     <div className="text-red-500">{errors.password}</div>
                   ) : null}
                   <Field
@@ -186,11 +184,9 @@ const RegisterForm = () => {
                     name="password_confirmation"
                     id="password_confirmation"
                     className="border py-2 px-3 rounded-md"
-                    placeholder="Konfirmasi Kata Sandi"
-                    required
+                    placeholder="Password Confirmation"
                   />
-                  {errors.password_confirmation &&
-                  touched.password_confirmation ? (
+                  {errors.password_confirmation ? (
                     <div className="text-red-500">
                       {errors.password_confirmation}
                     </div>
@@ -201,7 +197,7 @@ const RegisterForm = () => {
                       htmlFor="gender"
                       className="text-gray-700 text-sm font-medium"
                     >
-                      Jenis Kelamin
+                      Gender
                     </label>
                     <div className="flex gap-2">
                       <div className="flex items-center gap-2">
@@ -210,13 +206,13 @@ const RegisterForm = () => {
                           name="gender"
                           id="gender"
                           value="true"
-                          required
+                          
                         />
                         <label
                           htmlFor="gender"
                           className="text-gray-700 text-sm font-medium"
                         >
-                          Laki-laki
+                          Male
                         </label>
                       </div>
                       <div className="flex items-center gap-2">
@@ -225,15 +221,17 @@ const RegisterForm = () => {
                           name="gender"
                           id="gender2"
                           value="false"
-                          required
                         />
                         <label
                           htmlFor="gender2"
                           className="text-gray-700 text-sm font-medium"
                         >
-                          Perempuan
+                          Female
                         </label>
                       </div>
+                      {errors.gender ? (
+                        <div className="text-red-500">{errors.gender}</div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="flex flex-col">

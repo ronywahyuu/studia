@@ -28,8 +28,8 @@ const LoginForm = ({name}) => {
   // const { login } = useContext(AuthContext);
   // login schema
   const LoginValidationSchema = Yup.object().shape({
-    username: Yup.string().required("username tidak boleh kosong"),
-    password: Yup.string().required("Kata sandi tidak boleh kosong"),
+    username: Yup.string().required("Username cannot empty"),
+    password: Yup.string().required("Password cannot empty"),
   });
 
   console.log(`isfetching: ${fetching}`)
@@ -102,7 +102,7 @@ const LoginForm = ({name}) => {
                   placeholder="Username"
                   value={formik.values.username}
                   onChange={formik.handleChange}
-                  required
+                  
                 />
                 {formik.errors.username && formik.touched.username && (
                   <div className="text-red-500 text-sm">
@@ -117,7 +117,7 @@ const LoginForm = ({name}) => {
                   placeholder="Password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
-                  required
+                  
                 />
                 {formik.errors.password && formik.touched.password && (
                   <div className="text-red-500 text-sm">

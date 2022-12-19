@@ -59,7 +59,7 @@ const ViewArticles = () => {
               </div>
               <div className="decoration-image w-full justify-center h-full ">
                 <img
-                  src={DecorationImage}
+                  src={konten?.image?.url || DecorationImage}
                   className="w-8/12 ml-auto mr-auto"
                   alt=""
                 />

@@ -15,7 +15,6 @@ const Lessons = () => {
   const { roles } = useContext(AuthContext);
   // get params react router dom
   const { id } = useParams();
-  console.log(id);
   // get class by id
 
   const fetchClass = async () => {
@@ -51,11 +50,11 @@ const Lessons = () => {
 
   useEffect(() => {
     fetchClass();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchLesson();
-  }, []);
+  }, [id]);
 
   const renderLesson = lessons?.map((lesson, index) => {
     return loading ? (

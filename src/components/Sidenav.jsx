@@ -72,19 +72,6 @@ const Sidenav = () => {
             </NavLink>
           </li>
 
-          <li className="">
-            <NavLink
-              to="/h/hw"
-              className={({ isActive }) =>
-                `flex items-center py-2 px-4 rounded-lg hover:bg-primary  hover:text-white ${
-                  isActive ? "bg-primary text-white" : "text-gray-300"
-                }`
-              }
-            >
-              <IconHomework setActiveColor={setActiveColor} />
-              <span className="ml-4">Homework</span>
-            </NavLink>
-          </li>
           <li>
             <NavLink
               to="/h/articles"

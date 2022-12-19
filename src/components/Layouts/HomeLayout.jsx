@@ -67,7 +67,7 @@ const HomeLayout = () => {
             <Welcome />
             <Outlet />
           </div>
-          <div className="">
+          <div className="col-">
             <RightSide />
           </div>
         </div>

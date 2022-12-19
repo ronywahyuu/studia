@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import BannerImg from "../assets/images/featured-img.png";
+import BannerImg from "../assets/images/featured-image.jpg";
 import ClassCard from "../components/cards/ClassCard";
 import { useContext, useEffect, useState } from "react";
 import { KelasContext } from "../context/kelasContext";
@@ -49,9 +49,9 @@ const Dashboard = () => {
             />
 
             <div className="absolute top-7 left-10">
-              <h3 className="font-medium text-3xl text-white">Interaction</h3>
-              <p className="text-xl font-light text-white text-opacity-50">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.
+              <h3 className="font-medium text-3xl text-white">Studia</h3>
+              <p className="text-xl font-light text-white text-opacity-70">
+                We don't make study. We make study better
               </p>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Dashboard = () => {
 
             {/* class card list*/}
             <div className="grid grid-cols-2 gap-4 ">
-              {classes.length === 0 && <h1>No Classes</h1>}
+              {/* {classes.length === 0 && <h1>No Classes</h1>} */}
               {loading ? (
                 <Skeleton height={200} />
               ) : (

@@ -46,7 +46,6 @@ export const KelasContextProvider = ({ children }) => {
             const { data } = res.data;
             setClasses(data);
             setLoading(false);
-            console.log(data);
         } catch (err) {
             setError(err);
             setLoading(false);

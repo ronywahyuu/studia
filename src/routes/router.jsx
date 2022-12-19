@@ -66,12 +66,8 @@ const router = createBrowserRouter([
         //   path: '/h/hw/:id',
         // }
         {
-          path: '/h/hw/:id',
+          path: '/h/hw/:id/:lessonId',
           element: <HomeWorkAssignment />
-        },
-        {
-          path: '/h/hw/create',
-          element: <CreateHomeworkForm />
         },
         {
           path: '/h/classes/:id',
@@ -80,6 +76,10 @@ const router = createBrowserRouter([
         {
           path: '/h/classes/:classId/lessons/:lessonId',
           element: <ClassDetail />,
+        },
+        {
+          path: '/h/hw/create/:id',
+          element: <CreateHomeworkForm />
         },
         {
           path: '/h/classes/:id/create',

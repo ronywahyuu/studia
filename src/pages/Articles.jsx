@@ -10,6 +10,7 @@ import Skeleton from "react-loading-skeleton";
 const Articles = () => {
   const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,8 +42,11 @@ const Articles = () => {
           setArticles(data);
           setLoading(false);
           console.log(data)
+          setError(null)
         }
       }).catch((err)=>{
+        setLoading(false)
+        setError(err)
         console.log(err)
       });
     }
@@ -65,6 +69,8 @@ const Articles = () => {
     return "#" + color;
   };
 
+  console.log(error)
+
   return (
     <div className=" flex flex-col w-full animate-fade-in-right ">
       {/* main side */}
@@ -85,8 +91,9 @@ const Articles = () => {
           <div className="flex flex-col gap-5">
             {/* Article card list*/}
             <div className="grid grid-cols-2 gap-5 ">
-              {loading && <Skeleton height={900} width={800} />}
+              {loading && <Skeleton height={900} width={700} />}
               {renderArticles}
+              {error ? <p>Failed to fetch the articles from server. Please try again</p> : null}
             </div>
           </div>
         </div>

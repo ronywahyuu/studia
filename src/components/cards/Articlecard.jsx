@@ -7,6 +7,7 @@ const Articlecard = ({ article, color }) => {
   // console.log(color())
   // console.log(new Date(article?.release_date));
   // console.log(article?.id)
+  // console.log(article)
   return (
     <>
       {/* article card */}
@@ -17,7 +18,7 @@ const Articlecard = ({ article, color }) => {
           {/* Thumbnail */}
           <div className="flex thumbnail lg:w-2/5 sm:w-full ">
             <img
-              src={Thumbnail}
+              src={article.image?.url ? article.image?.url : Thumbnail}
               className="ml-auto mr-auto h-fit mt-auto mb-auto"
               alt=""
             />
@@ -28,9 +29,9 @@ const Articlecard = ({ article, color }) => {
             <h3 className="text-2xl font-medium">{article?.name}</h3>
 
             {/* desc */}
-            <div className="flex flex-col gap-2 mt-2 ">
+            <div className="flex flex-col gap-2 mt-2  h-20">
               <div
-                className="truncate text-gray-300"
+                className="truncate text-gray-300 h-full overflow-scroll"
                 dangerouslySetInnerHTML={{ __html: article?.text }}
               ></div>
               {/* <p className="text-gray-300 truncate">

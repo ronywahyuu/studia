@@ -4,11 +4,11 @@ const ButtonSpin = () => {
   return (
     <button
       type="button"
-      className="flex justify-center items-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-[#77BBE2] hover:bg-rose-500 focus:border-rose-700 active:bg-rose-700 transition ease-in-out duration-150 cursor-not-allowed "
+      className="flex mt-4 justify-center items-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-[#77BBE2] hover:bg-rose-500 focus:border-rose-700 active:bg-rose-700 transition ease-in-out duration-150 cursor-not-allowed "
       disabled=""
     >
       <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+        className="animate-spin -ml-1 mr-3  w-5 text-white"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

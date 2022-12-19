@@ -1,10 +1,68 @@
-import React from "react";
+import React, { useContext } from "react";
 // import ClassContentField from "../components/ClassContentField";
 // import ClassContentImg from "../assets/images/featured-img.png";
 import BannerImg from "../assets/images/banner.png";
+import axios from "axios";
+import { AuthContext } from "../context/authContext";
+import { TugasContext } from "../context/tugasContext";
+import { useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 // import { Link } from "react-router-dom";
 
+
 const HomeWorkAssignment = () => {
+  const [homework, setHomework] = React.useState(null);
+  const [tugas, setTugas] = React.useState(null);
+  const {idLesson, notifyUploadSuccess, notifyUploadError} = useContext(TugasContext);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  const {id, lessonId} = useParams();
+
+  console.log(`id: ${id}`)
+  console.log(`lessonId: ${lessonId}`)
+
+  React.useEffect(() => {
+    const fetchHomework = async () => {
+      await axios.get(`https://studia.deta.dev/tugas/${id}/l/${lessonId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
+        // setHomework(res.data.data);
+        setHomework(res.data);
+        console.log(res);
+      })
+    }   
+    fetchHomework();
+  }, []);
+
+  const uploadFile = async (e) => {
+    e.preventDefault();
+    setLoading(true)
+    const formData = new FormData();
+    formData.append("tugas", tugas);
+    console.log(tugas);
+    await axios.post(`https://studia.deta.dev/tugas/upload/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'multipart/form-data'
+      },
+    }).then((res) => {
+      setLoading(false)
+      console.log(res.status);
+      setError(null);
+      if(error !== null){
+        notifyUploadSuccess();
+      }
+      // notifyUploadSuccess();
+    }).catch((err) => {
+      setError(true);
+      notifyUploadError();
+      setLoading(false)
+      console.log(err);
+    })
+  }
   return (
     <div className="animate-fade-in-right">
       <div className="flex justify-between items-center mt-10 mb-5">
@@ -14,17 +72,17 @@ const HomeWorkAssignment = () => {
       <div className="grid  gap-4 ">
         <div className="flex flex-col rounded-lg justify-between border-t-8 border-blue-900 bg-white p-5 ">
           <div className="flex flex-col justify-between gap-5">
-            <h3 className="text-2xl font-medium">Interaction</h3>
-            <p>
+            <h3 className="text-2xl font-medium">{homework?.name}</h3>
+            {/* <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius.
-            </p>
+            </p> */}
           </div>
 
           <hr className="mt-5 mb-10" />
           {/* picture */}
           <div className="">
             {/* banner image */}
-            <div className=" w-full h-80 bg-slate-300 relative overflow-hidden rounded-xl">
+            {/* <div className=" w-full h-80 bg-slate-300 relative overflow-hidden rounded-xl">
               <img
                 src={BannerImg}
                 className="absolute inset-0 w-full h-full object-cover opacity-60 transition transform hover:scale-105"
@@ -38,31 +96,18 @@ const HomeWorkAssignment = () => {
                   Varius.
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* homework description */}
-          <div className="mt-5">
-            <p className="text-base text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+          <div className="text-gray-800" dangerouslySetInnerHTML={{__html:homework?.description}}>
+            {/* <p className="text-base text-gray-600">
+              {homework?.description}
+            </p> */}
           </div>
 
           {/* posted by */}
-          <div className="flex justify-between my-8">
+          {/* <div className="flex justify-between my-8">
             <div className="flex items-center gap-3">
               <img
                 src="https://picsum.photos/200"
@@ -73,10 +118,10 @@ const HomeWorkAssignment = () => {
                 <h3 className="text-lg font-medium text-gray-400">Wadew Ma</h3>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* task submit form */}
-          <form className=" ">
+          <form className="mt-20" onSubmit={uploadFile}>
             <div className="flex flex-col rounded-2xl bg-soft-gray p-5">
               <p className="text-base text-gray-500 font-medium">
                 Turn Your Work Here!{" "}
@@ -91,6 +136,8 @@ const HomeWorkAssignment = () => {
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100
                   "
+                  onChange={(e) => setTugas(e.target.files[0])}
+                  required
                 />
               </label>
 
@@ -130,7 +177,7 @@ const HomeWorkAssignment = () => {
                       </g>
                     </svg>
                   </div>
-                  <span>12/12/2023</span>
+                  <span>{new Date(homework?.deadline).toLocaleString()}</span>
                 </div>
               </div>
             </div>
@@ -143,6 +190,7 @@ const HomeWorkAssignment = () => {
           </form>
         </div>
       </div>
+      <ToastContainer theme="light"/>
     </div>
   );
 };

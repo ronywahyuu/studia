@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ClassContentField from "../components/ClassContentField";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import IconChat from "../assets/images/svg/IconChat";
 import IconStickyNotes from "../assets/images/svg/IconStickyNotes";
 import ClassContentImg from "../assets/images/featured-img.png";
+import { AuthContext } from "../context/authContext";
+import IconPlus from "../assets/images/svg/IconPlus";
+import { TugasContext } from "../context/tugasContext";
 
 const ClassDetail = () => {
   const [lessons, setLessons] = useState(null);
   const [loading, setLoading] = useState(true);
   const { lessonId } = useParams();
-  console.log(lessonId)
+  const { roles } = useContext(AuthContext);
+  // const {id} = useParams();
+
+  const {idLesson, setIdLesson} = useContext(TugasContext);
+
   const fetchLesson = async () => {
     setLoading(true);
     try {
@@ -22,6 +29,7 @@ const ClassDetail = () => {
       const { data } = res.data;
       setLessons(data);
       // console.log(data);
+      // setTugasCtx(data.tugas);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -29,16 +37,27 @@ const ClassDetail = () => {
     }
   };
   useEffect(() => {
+    setIdLesson(lessonId);
     fetchLesson();
   }, []);
 
 
-  console.log(lessons)
+  // console.log(lessons);
 
   return (
     <div className="animate-fade-in-right">
       <div className="flex justify-between items-center mt-10 mb-5">
         <h1 className="text-xl text-slate-500 font-medium">My Classes</h1>
+        {roles() === "Teacher" && (
+          <Link to={`/h/hw/create/${lessonId}`}>
+            <button className="cursor-pointer flex gap-2 items-center">
+              <IconPlus />
+              <span className="text-base font-medium text-slate-600">
+                Create Homework
+              </span>
+            </button>
+          </Link>
+        )}
       </div>
 
       <div className="grid  gap-4 ">
@@ -75,8 +94,11 @@ const ClassDetail = () => {
             </div>
 
             <div className="flex items-center gap-2">
+              <p className="font-medium text-gray-400">Posted On:</p>
               <IconStickyNotes />
-              <h3 className="text-lg font-medium text-gray-400">B Classes</h3>
+              <h3 className="text-lg font-medium text-gray-400">
+                {new Date(lessons?.created_at).toLocaleDateString()}
+              </h3>
             </div>
           </div>
 

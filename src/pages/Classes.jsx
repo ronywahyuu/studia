@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
 import IconPlus from "../assets/images/svg/IconPlus";
@@ -42,11 +42,13 @@ const Classes = () => {
 
   // console.log(ownClasses);
   const renderStudentClassCard = classes?.map((item, index) => {
-    return <ClassCard key={index} data={item} />;
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return <ClassCard key={index} data={item} color={randomColor} />;
   });
 
   const renderTeacherClassCard = ownClasses?.map((item, index) => {
-    return <ClassCard key={index} data={item} />;
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    return <ClassCard key={index} data={item} color={randomColor} />;
   });
 
   return (

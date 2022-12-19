@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import IconChat from "../../assets/images/svg/IconChat";
 import IconClock from "../../assets/images/svg/IconClock";
 import IconStickyNotes from "../../assets/images/svg/IconStickyNotes";
+import { AuthContext } from "../../context/authContext";
 
-const ClassCard = ({ data }) => {
+const ClassCard = ({ data, color }) => {
   // console.log(data.image.url)
+  const { roles } = useContext(AuthContext);
 
-  console.log(data)
+  console.log(data);
   return (
     <>
       {/* class card */}
       <Link to={`/h/classes/${data?.id}`} className="">
-        <div className="flex flex-col rounded-lg justify-between border-t-8 border-blue-900 bg-white p-5 ">
+        <div
+          className={`flex flex-col rounded-lg justify-between border-t-8 border-blue-600 bg-white p-5 `}
+        >
           <div className="flex items-center justify-between gap-5">
             <h3 className="text-2xl font-medium">{data?.name}</h3>
             {/* <p className="text-gray-300">12:00 - 13:00</p> */}
@@ -20,30 +24,33 @@ const ClassCard = ({ data }) => {
 
           {/* desc */}
           <div className="flex flex-col gap-5 mt-5">
-            <p className="text-gray-300">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              quod.
-            </p>
+            <p className="text-gray-300">{data?.section}</p>
 
             {/* lecturer */}
             <div className="flex items-center gap-3">
-              <img
-                src="https://picsum.photos/200"
-                alt=""
-                className="w-10 h-10 rounded-full"
-              />
-              <div className="flex flex-col">
-                <h3 className="text-lg font-medium text-gray-400">
-                  {data?.owner ? data.owner?.name : "none"}
-                </h3>
-              </div>
+              {roles() === "Teacher" ? null : (
+                <>
+                  <img
+                    src="https://picsum.photos/200"
+                    alt=""
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className="flex flex-col">
+                    <h3 className="text-lg font-medium text-gray-400">
+                      {data?.owner ? data.owner?.name : "none"}
+                    </h3>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* class info */}
             <div className="flex items-center justify-between ">
               <div className="flex  flex-col ">
                 {/* <IconStickyNotes /> */}
-                <h4 className="text-base text-slate-500 font-bold">Class Code</h4>
+                <h4 className="text-base text-slate-500 font-bold">
+                  Class Code
+                </h4>
                 <div className="class-card__title">
                   <h3 className="text-slate-600 ">{data?.code}</h3>
                 </div>
@@ -82,12 +89,12 @@ const ClassCard = ({ data }) => {
                   </div>
                 </div>
               </div> */}
-              <p>Joined: {data?.count}</p>
+              {/* <p>Joined: {data?.count}</p> */}
               {/* interactions */}
-              <div className="flex items-center gap-1">
+              {/* <div className="flex items-center gap-1">
                 <p>30</p>
                 <IconChat />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
