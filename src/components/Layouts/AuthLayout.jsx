@@ -39,7 +39,7 @@ const AuthLayout = () => {
           <div className=" w-10/12 h-5/6 bg-gray-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-50 border border-gray-50 absolute py-8 px-10">
             <div className="flex flex-col  h-full items-center justify-between">
               <h2 className="text-4xl text-white font-bold tracking-wide">
-                We Don't Study. We Make Study Better.
+                We Don't Make Study. We Make Study Better.
               </h2>
 
               <img src={Illust1} alt="" className=" mb-10" />

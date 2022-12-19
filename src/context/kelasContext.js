@@ -58,7 +58,6 @@ export const KelasContextProvider = ({ children }) => {
             if (roles() === "Teacher") {
                 getOwnClasses();
             }
-            console.log(`anjinggg kok ga bisa`)
 
             if (roles() === "Student") {
             }

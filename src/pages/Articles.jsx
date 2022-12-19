@@ -13,30 +13,49 @@ const Articles = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const fetchArticles = async () => {
-    setLoading(true);
-    const res = await axios.get(`/konten`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    const { data } = res.data;
-    setArticles(data);
-    setLoading(false);
-    navigate("/h/articles")
-    console.log(data);
-  };
+  // const fetchArticles = async () => {
+  //   setLoading(true);
+  //   const res = await axios.get(`/konten`, {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   });
+  //   const { data } = res.data;
+  //   setArticles(data);
+  //   setLoading(false);
+  //   navigate("/h/articles");
+  //   console.log(data);
+  // };
 
   useEffect(() => {
-    fetchArticles();
-    // clean up
-    return () => {
-      setArticles([]);
+    let isMounted = true;
+    const fetchArticles = async () => {
+      setLoading(true)
+      await axios.get(`/konten`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res)=>{
+        const { data } = res.data;
+        if(isMounted){
+          setArticles(data);
+          setLoading(false);
+          console.log(data)
+        }
+      }).catch((err)=>{
+        console.log(err)
+      });
     }
+    fetchArticles();
+
+    return () => {
+      isMounted = false;
+    }
+
   }, [location.pathname]);
 
   const renderArticles = articles?.map((article, index) => {
-    if(loading) return <Skeleton height={250} width={400} />
+    if (loading) return <Skeleton height={250} width={400} />;
     return <Articlecard article={article} key={index} />;
   });
 

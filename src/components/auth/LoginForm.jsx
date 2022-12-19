@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Logo from "../../assets/images/logo.png";
+import NewLogo from "../../assets/images/new-logo.png";
 import FbIcon from "../../assets/images/fb-icon.png";
 import GoogleIcon from "../../assets/images/google-icon.png";
 import Footer from "../../components/Footer";
@@ -72,17 +73,17 @@ const LoginForm = ({name}) => {
         {/* Login form */}
         <div className=" md:w-8/12 w-full">
           <div className="logo flex flex-col items-center justify-center ">
-            <img src={Logo} className="" alt="" />
+            <img src={NewLogo} className="" alt="" />
           </div>
 
           <div className="login-form  p-10">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-gray-700 text-2xl font-bold">Masuk</h2>
+              <h2 className="text-gray-700 text-2xl font-bold">Sign In</h2>
               <a
                 href="/auth/register"
                 className="text-blue-600 text-base font-normal"
               >
-                Daftar
+                Register
               </a>
             </div>
 
@@ -98,7 +99,7 @@ const LoginForm = ({name}) => {
                   name="username"
                   id="username"
                   className="border py-2 px-3 rounded-md "
-                  placeholder="Nomor Ponsel atau username"
+                  placeholder="Username"
                   value={formik.values.username}
                   onChange={formik.handleChange}
                   required
@@ -113,7 +114,7 @@ const LoginForm = ({name}) => {
                   name="password"
                   id="password"
                   className="border py-2 px-3 rounded-md"
-                  placeholder="Kata Sandi"
+                  placeholder="Password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   required
@@ -131,7 +132,7 @@ const LoginForm = ({name}) => {
                       type="submit"
                       className="bg-[#77BBE2] py-3 rounded-md mt-5 font-md text-white"
                     >
-                      Masuk
+                      Sign In
                     </button>
                   )}
                 </div>
@@ -139,19 +140,18 @@ const LoginForm = ({name}) => {
             </div>
 
             {/* forgot password */}
-            <div className="forgot-password mt-5">
+            {/* <div className="forgot-password mt-5">
               <p className="">
                 Lupa kata sandi?{" "}
                 <a href="/forgot-password" className="text-sky-500 font-bold">
                   Klik Disini
                 </a>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
-        {/* divider */}
-        <div className=" md:w-8/12 w-full flex justify-center items-center">
+        {/* <div className=" md:w-8/12 w-full flex justify-center items-center">
           <div className="border md:w-full w-1/2"></div>
           <div className="w-full text-gray-300 text-xs md:text-base font-bold flex justify-center">
             atau masuk dengan
@@ -159,10 +159,8 @@ const LoginForm = ({name}) => {
           <div className="border md:w-full w-1/2"></div>
         </div>
 
-        {/* social media */}
         <div className="social-media w-8/12 flex flex-col gap-4 mt-5 ">
           <button className=" py-3 rounded-md font-md border text-white ">
-            {/* logo */}
             <div className="flex items-center justify-center gap-2 text-slate-600 font-medium">
               <img src={FbIcon} alt="" />
               <span>Masuk dengan Facebook</span>
@@ -170,13 +168,12 @@ const LoginForm = ({name}) => {
           </button>
 
           <button className=" py-3 rounded-md font-md border text-white">
-            {/* logo */}
             <div className="flex items-center justify-center gap-2 text-slate-600 font-medium">
               <img src={GoogleIcon} alt="" />
               <span>Masuk dengan Google</span>
             </div>
           </button>
-        </div>
+        </div> */}
         {/* footer */}
         <div className="footer mt-5 ">
           <Footer />

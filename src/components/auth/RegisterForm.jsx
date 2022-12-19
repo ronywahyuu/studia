@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../Footer";
 import Logo from "../../assets/images/logo.png";
+import NewLogo from "../../assets/images/new-logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import * as Yup from "yup";
@@ -98,7 +99,7 @@ const RegisterForm = () => {
         {({ errors, touched }) => (
           <div className=" md:w-8/12 w-full">
             <div className="logo flex flex-col items-center justify-center ">
-              <img src={Logo} className="" alt="" />
+              <img src={NewLogo} className="" alt="" />
             </div>
 
             <div className="register-form  p-10">
