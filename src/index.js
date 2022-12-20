@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AuthContextProvider } from './context/authContext';
+import { KelasContextProvider } from './context/kelasContext';
+import { RouterProvider } from 'react-router-dom';
+import { TugasContextProvider } from './context/tugasContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthContextProvider>
+      <KelasContextProvider>
+        <TugasContextProvider>
+          <App />
+        </TugasContextProvider>
+      </KelasContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 
