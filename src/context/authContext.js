@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
         setFetching(true);
         try {
           await axios
-            .post("/users/login", values)
+            .post("https://studia.deta.dev/users/login", values)
             .then((res) => {
               const token = res.data.access_token;
               localStorage.setItem("token", token);
