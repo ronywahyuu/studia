@@ -8,14 +8,6 @@ import { useLocation, useParams } from "react-router-dom";
 const RightSide = () => {
   const { classes } = useContext(KelasContext);
 
-  const location = useLocation();
-
-  const {id} = useParams()
-
-
-
-  console.log(id)
-  // console.log(location.pathname === `/h/classes/41dd093e-b8e8-4cce-bae6-e9133b26576c/lessons/${id}`)
 
   return (
     <aside className=" sticky top-0  h-screen ">

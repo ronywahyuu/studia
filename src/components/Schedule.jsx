@@ -34,12 +34,13 @@ const Schedule = ({ classes }) => {
   };
 
   useEffect(() => {
-    fetchTugas();
+    if (lessonParams !== undefined){
+      fetchTugas();
+    }
   }, [lessonParams]);
 
   const renderClass = classes.map((item, index) => {
     // const randomColor = Math.floor(Math.random()*16777215).toString(16);
-    console.log();
     return (
       <Link 
         params={{ id: item?.id }}

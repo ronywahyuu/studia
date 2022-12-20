@@ -8,12 +8,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonSpin from "../loading/ButtonSpin";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const CreateClass = () => {
   const [loading, setLoading] = useState(false);
 
   const notifySuccess = () => toast.success("Kelas berhasil dibuat");
 
+
+  const navigate = useNavigate(); 
   // yup validation
   const CreateValidationSchema = Yup.object().shape({
     subject: Yup.string().required("Subject tidak boleh kosong"),
@@ -43,7 +46,7 @@ const CreateClass = () => {
           }
         );
         console.log(res);
-        // navigate("/h/classes");
+        navigate("/h/classes");
         setLoading(false);
       } catch (err) {
         console.log(err);

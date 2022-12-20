@@ -3,14 +3,19 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import * as Yup from "yup";
+import { string } from "yup";
 
 import { Link, useNavigate } from "react-router-dom";
 import ButtonSpin from "../components/loading/ButtonSpin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import RightSide from "../components/RightSide"
 
 const CreateArticle = () => {
   const navigate = useNavigate();
-
+  
   const [kontens, setKontens] = useState({
     name: "",
     text: "",
@@ -21,6 +26,17 @@ const CreateArticle = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [valid, setValid] = useState(false);
+
+  const CreateValidationSchema = Yup.object().shape({
+    name: Yup.string().required("Title cannot be empty"),
+    text: Yup.string().required("Subtitle cannot be empty"),
+    synopsis: Yup.string().required("Field cannot be empty"),
+  })
+
+  const notifyUploadError = () => toast.error("Upload Failed: Please Fill all fields");
+  const notifyUploadSuccess = () => toast.success("Upload Success");
+
   const handleUpload = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -38,22 +54,59 @@ const CreateArticle = () => {
           // cors
         },
         withCredentials: false,
-      });
+      })
       console.log(response.data);
       setLoading(false);
-      navigate("/h/articles");
+      notifyUploadSuccess();
+      if(notifyUploadSuccess){
+        navigate("/h/articles");
+      }
     } catch (err) {
+      notifyUploadError();
       setLoading(false);
       console.log(err);
     }
   };
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     name: "",
+  //     text: "",
+  //     synopsis: "",
+  //   },
+  //   validationSchema: CreateValidationSchema,
+  //   onSubmit: async (values) => {
+  //     const form = new FormData();
+  //     form.append("file", image);
+  //     form.append("kontens", JSON.stringify(values));
+
+  //     console.log(image);
+  //     console.log(values);
+  //     try {
+  //       const response = await axios.post("/konten/", form, {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //           "Content-Type": `multipart/form-data`,
+  //           // cors
+  //         },
+  //         withCredentials: false,
+  //       });
+  //       console.log(response.data);
+  //       setLoading(false);
+  //       navigate("/h/articles");
+  //     } catch (err) {
+  //       setLoading(false);
+  //       console.log(err);
+  //     }
+  //   },
+  // });
 
   return (
     <div className=" flex animate-fade-in-right ">
       {/* main side */}
       <form
         onSubmit={handleUpload}
-        encType="multipart/form-data"
+        // encType="multipart/form-data"
         className=" bg-soft-gray w-full"
       >
         <div className="flex flex-col gap-5 mt-10">
@@ -69,30 +122,32 @@ const CreateArticle = () => {
               <div className="flex flex-col justify-between gap-5 w-11/12">
                 <div className="flex xl:w-[730px]"></div>
                 <input
-                  type="title"
+                  type="text"
                   name="title"
                   id="title"
                   className="border py-2 px-3 rounded-md "
                   placeholder="Title"
+                  // value={formik.values.name}
+                  // onChange={formik.handleChange}
                   value={kontens.name}
                   onChange={(e) =>
                     setKontens({ ...kontens, name: e.target.value })
                   }
-                  // value={title}
-                  // onChange={(e) => setTitle(e.target.value)}
+                  
                 />
                 <input
-                  type="subtitle"
+                  type="text"
                   name="subtitle"
                   id="subtitle"
                   className="border py-2 px-3 rounded-md "
                   placeholder="Sub Title"
+                  // value={formik.values.synopsis}
+                  // onChange={formik.handleChange}
                   value={kontens.synopsis}
                   onChange={(e) =>
                     setKontens({ ...kontens, synopsis: e.target.value })
                   }
-                  // value={subtitle}
-                  // onChange={(e) => setSubtitle(e.target.value)}
+                  
                 />
 
                 <h3 className="text-slate-400">Article Image:</h3>
@@ -107,29 +162,17 @@ const CreateArticle = () => {
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100"
                   onChange={(e) => setImage(e.target.files[0])}
+                  
                 />
-                {/* <div className="border flex items-center justify-center text-center h-40">
-                  <label
-                    htmlFor="photo"
-                    className=" text-slate-400 cursor-pointer  "
-                  >Image</label>
-                  <img src={image ? image : null} className="w-full" />
-                </div> */}
-                {/* <textarea
-                    type="textfield"
-                    name="textfield"
-                    id="textfield"
-                    className="border py-5 px-3 rounded-md h-80 resize-none"
-                    placeholder="Add text ..."
-                  /> */}
                 <div className=" rounded-md h-80 w-full  relative">
                   <ReactQuill
                     theme="snow"
                     className="absolute inset-0"
+                    // value={formik.values.text}
+                    // onChange={formik.handleChange}
                     value={kontens.text}
                     onChange={(e) => setKontens({ ...kontens, text: e })}
-                    // value={content}
-                    // onChange={(e) => setContent(e)}
+                    required
                   />
                 </div>
                 {loading ? (
@@ -138,7 +181,7 @@ const CreateArticle = () => {
                   <button
                     type="submit"
                     className="flex mt-10 justify-center items-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-[#77BBE2] "
-                    >
+                  >
                     Submit
                   </button>
                 )}
@@ -147,7 +190,7 @@ const CreateArticle = () => {
           </div>
         </div>
       </form>
-
+                <ToastContainer />
       {/* right side */}
       {/* <RightSide/> */}
     </div>
