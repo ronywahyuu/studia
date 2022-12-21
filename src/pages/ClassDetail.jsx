@@ -21,7 +21,7 @@ const ClassDetail = () => {
   const fetchLesson = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/lesson/${lessonId}`, {
+      const res = await axios.get(`https://studia.deta.dev/lesson/${lessonId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

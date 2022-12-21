@@ -19,7 +19,7 @@ export const KelasContextProvider = ({ children }) => {
     const getOwnClasses = async () => {
         setLoading(true);
         try {
-            const res = await axios.get("/kelas/current_owner", {
+            const res = await axios.get("https://studia.deta.dev/kelas/current_owner", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
@@ -38,7 +38,7 @@ export const KelasContextProvider = ({ children }) => {
         setLoading(true);
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get(`/kelas/joined/current?populate=%2A`, {
+            const res = await axios.get(`https://studia.deta.dev/kelas/joined/current?populate=%2A`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

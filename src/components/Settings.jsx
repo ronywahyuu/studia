@@ -17,7 +17,7 @@ const Settings = () => {
     setLoading(true);
     try {
       const res = await axios.put(
-        `/users/update/${user?.id}`,
+        `https://studia.deta.dev/users/update/${user?.id}`,
         {
           name,
           address,

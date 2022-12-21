@@ -34,7 +34,7 @@ const CreateClass = () => {
       console.log(values);
       try {
         const res = await axios.post(
-          "/kelas",
+          "https://studia.deta.dev/kelas",
           {
             name: values.subject,
             section: values.description,

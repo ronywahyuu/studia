@@ -32,7 +32,7 @@ const Articles = () => {
     let isMounted = true;
     const fetchArticles = async () => {
       setLoading(true)
-      await axios.get(`/konten`, {
+      await axios.get(`https://studia.deta.dev/konten`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

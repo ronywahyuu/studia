@@ -29,7 +29,7 @@ const CreateArticle = () => {
     setLoading(true);
     try {
       console.log(kontens);
-      const response = await axios.post(`/tugas/${id}`, kontens, {
+      const response = await axios.post(`https://studia.deta.dev/tugas/${id}`, kontens, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

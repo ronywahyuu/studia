@@ -2,10 +2,15 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
 import ReactQuill from "react-quill";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import ButtonSpin from "../loading/ButtonSpin";
 
 const CreateLesson = () => {
   const { id } = useParams();
+  const [loading, setLoading] = React.useState(false);
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -19,20 +24,32 @@ const CreateLesson = () => {
         detail: values.detail,
       });
 
-      try{
-        const res = await axios.post(`/lesson/create`, {
-          name: values.title,
-          deskripsi: values.description,
-          detail: values.detail,
-          kelas_id : id
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        console.log(res)
-      }catch(error){
-        console.log(error)
+      if (values.detail !== "") {
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `https://studia.deta.dev/lesson/create`,
+            {
+              name: values.title,
+              deskripsi: values.description,
+              detail: values.detail,
+              kelas_id: id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          console.log(res);
+          setLoading(false);
+          navigate(`/h/classes/${id}`);
+        } catch (error) {
+          setLoading(false);
+          console.log(error);
+        }
+      } else {
+        alert("Fill the detail field");
       }
     },
   });
@@ -45,7 +62,7 @@ const CreateLesson = () => {
           </div>
           {/* featured Article */}
           <div className="flex flex-col gap-5 w-full h-full">
-            <div className="flex flex-col rounded-lg justify-between border-t-8 border-[#77BBE2] bg-white p-5 ">
+            <div className="flex flex-col rounded-lg justify-center items-center border-t-8 border-[#77BBE2] bg-white p-5 ">
               {/* Title */}
               <div className="flex flex-col justify-between gap-5 w-11/12">
                 <div className="flex xl:w-[730px]"></div>
@@ -57,6 +74,7 @@ const CreateLesson = () => {
                   placeholder="Title"
                   value={formik.values.title}
                   onChange={formik.handleChange}
+                  required
                 />
                 <input
                   type="text"
@@ -66,6 +84,7 @@ const CreateLesson = () => {
                   placeholder="Description"
                   value={formik.values.description}
                   onChange={formik.handleChange}
+                  required
                 />
                 {/* <div className="border flex items-center justify-center text-center h-40">
                   <label
@@ -91,17 +110,21 @@ const CreateLesson = () => {
                 <div className=" rounded-md h-80 w-full  relative">
                   <ReactQuill
                     theme="snow"
-                    className="absolute inset-0"
+                    className="absolute inset-0 mb-10"
                     value={formik.values.detail}
                     onChange={(value) => formik.setFieldValue("detail", value)}
                   />
                 </div>
-                <button
-                  className="px-5 py-2 w-36 ml-auto text-white rounded-3xl mt-10 bg-[#77BBE2]"
-                  onClick={formik.handleSubmit}
-                >
-                  Submit
-                </button>
+                {loading ? (
+                  <ButtonSpin />
+                ) : (
+                  <button
+                    className="flex mt-10 justify-center items-center px-4 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-[#77BBE2] hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out"
+                    onClick={formik.handleSubmit}
+                  >
+                    Submit
+                  </button>
+                )}
               </div>
             </div>
           </div>
