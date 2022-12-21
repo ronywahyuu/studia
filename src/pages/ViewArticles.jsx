@@ -14,7 +14,7 @@ const ViewArticles = () => {
   const getSingleKonten = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/konten/${id}`, {
+      const res = await axios.get(`https://studia.deta.dev/konten/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

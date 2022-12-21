@@ -19,7 +19,7 @@ const Lessons = () => {
 
   const fetchClass = async () => {
     setLoading(true);
-    const res = await axios.get(`/kelas/${id}`, {
+    const res = await axios.get(`https://studia.deta.dev/kelas/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -33,7 +33,7 @@ const Lessons = () => {
   const fetchLesson = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/lesson/k/${id}`, {
+      const res = await axios.get(`https://studia.deta.dev/lesson/k/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

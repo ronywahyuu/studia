@@ -29,7 +29,7 @@ const JoinClass = () => {
           console.log(user_id);
           setLoading(true);
           try {
-            const res = await axios.post("/kelas/join", {
+            const res = await axios.post("https://studia.deta.dev/kelas/join", {
               ...values,
               user_id,
             },{

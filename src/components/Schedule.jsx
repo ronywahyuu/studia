@@ -3,14 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { TugasContext } from "../context/tugasContext";
 
-
 const Schedule = ({ classes }) => {
   const [loading, setLoading] = useState(false);
   const [tugas, setTugas] = useState(null);
   const location = useLocation();
 
-
-  const {tugasCtx, setTugasCtx} = useContext(TugasContext)
+  const { tugasCtx, setTugasCtx } = useContext(TugasContext);
 
   // log the endpoint parameter with location
   const lessonParams = location.pathname.split("/")[5];
@@ -18,7 +16,8 @@ const Schedule = ({ classes }) => {
   const fetchTugas = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`/tugas/${lessonParams}`, {
+      // const res = await axios.get(`/tugas/${lessonParams}`, {
+      const res = await axios.get(`https://studia.deta.dev/tugas/${lessonParams}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -34,7 +33,7 @@ const Schedule = ({ classes }) => {
   };
 
   useEffect(() => {
-    if (lessonParams !== undefined){
+    if (lessonParams !== undefined) {
       fetchTugas();
     }
   }, [lessonParams]);
@@ -42,9 +41,7 @@ const Schedule = ({ classes }) => {
   const renderClass = classes.map((item, index) => {
     // const randomColor = Math.floor(Math.random()*16777215).toString(16);
     return (
-      <Link 
-        params={{ id: item?.id }}
-        to={`/h/classes/${item?.id}`}>
+      <Link params={{ id: item?.id }} to={`/h/classes/${item?.id}`}>
         {/* schedule list */}
         <div className="mt-5">
           {/* single schedule */}
@@ -125,7 +122,7 @@ const Schedule = ({ classes }) => {
       return renderClass;
     }
     if (location.pathname.split("/")[4] === "lessons") {
-      if(lessonParams) {
+      if (lessonParams) {
         return renderTugas;
       }
     }

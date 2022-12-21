@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
         setFetching(true);
         try {
           await axios
-            .post("/users/login", values)
+            .post("https://studia.deta.dev/users/login", values)
             .then((res) => {
               const token = res.data.access_token;
               localStorage.setItem("token", token);
@@ -61,7 +61,7 @@ export const AuthContextProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             const token = localStorage.getItem("token");
-            const res = await axios.get("/users/current?image=true", {
+            const res = await axios.get("https://studia.deta.dev/users/current?image=true", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

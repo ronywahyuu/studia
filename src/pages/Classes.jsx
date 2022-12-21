@@ -24,7 +24,7 @@ const Classes = () => {
     const getOwnClasses = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("/kelas/current_owner", {
+        const res = await axios.get("https://studia.deta.dev/kelas/current_owner", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

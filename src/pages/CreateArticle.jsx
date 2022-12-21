@@ -47,7 +47,7 @@ const CreateArticle = () => {
     console.log(image);
     console.log(kontens);
     try {
-      const response = await axios.post("/konten/", form, {
+      const response = await axios.post("https://studia.deta.dev/konten/", form, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": `multipart/form-data`,
